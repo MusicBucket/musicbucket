@@ -1,0 +1,77 @@
+[Paths]
+APP_ROOT                  = /Users/pauriera/workspace/musicbucket/src
+STATIC_ROOT               = /tmp/musicbucket-static
+MEDIA_URL                 = /Users/pauriera/workspace/musicbucket/media
+
+[Logs]
+SENTRY_ENABLED            = False
+SENTRY_DSN                =
+LOG_LEVEL                 = DEBUG
+DJANGO_LOG_LEVEL          = INFO
+; EXTRA_LOGGING           = boto3:INFO,botocore:INFO
+; LOG_FILE                = /Users/pauriera/workspace/musicbucket/musicbucket.log
+
+; [Database]
+; DATABASE_USER           = pau
+; DATABASE_HOST           = localhost
+; DATABASE_ENGINE         = postgresql_psycopg2
+; DATABASE_NAME           = musicbucket
+; DATABASE_PORT           =
+; DATABASE_PASSWORD       = 1234
+; DATABASE_CONN_MAX_AGE   = 30
+
+; TEST_DATABASE_USER      = pau
+; TEST_DATABASE_ENGINE    = postgresql_psycopg2
+; TEST_DATABASE_HOST      = localhost
+; TEST_DATABASE_NAME      = musicbucket_test_db
+; TEST_DATABASE_PORT      = 5434
+; TEST_DATABASE_PASSWORD  = 1234
+
+[Base]
+APP_SLUG                  = musicbucket
+
+[Security]
+SECRET_KEY                =
+ALLOWED_HOSTS             = *
+
+[Debug]
+DEBUG                     = True
+TEMPLATE_DEBUG            = True
+ENABLE_DEBUG_TOOLBAR      = True
+
+[Compress]
+COMPRESS_ENABLED          = True
+COMPRESS_OFFLINE          = False
+COMPRESS_LESSC_PATH       = ../node_modules/.bin/lessc
+COMPRESS_BABEL_PATH       = ../node_modules/.bin/babel
+COMPRESS_SASS_PATH        = ../node_modules/.bin/node-sass
+
+[WhiteNoise]
+ENABLE_WHITENOISE = False
+
+[Cache]
+; CACHE_TYPE              = dummy
+CACHE_TYPE              = redis
+REDIS_HOST              = localhost
+CACHE_REDIS_DB          = 2
+REDIS_PORT              = 6379
+CACHE_MAX_ENTRIES       = 10000
+CACHE_TIMEOUT           = 3600
+CACHE_PREFIX            = musicbucket
+SESSION_CACHE_REDIS_DB  = 3
+
+[Storage]
+AWS_STORAGE_BUCKET_NAME     = musicbucket
+AWS_LOCATION                = musicbucket
+AWS_S3_REGION_NAME          = eu-west-1
+AWS_ACCESS_KEY_ID           = change_me
+AWS_SECRET_ACCESS_KEY       = change_me
+AWS_QUERYSTRING_AUTH        = False
+
+[Spotify]
+SPOTIFY_CLIENT_ID           =
+SPOTIFY_CLIENT_SECRET       =
+
+[Lastfm]
+LASTFM_API_KEY          =
+LASTFM_API_SECRET       =

@@ -1,0 +1,46 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.7"
+
+[packages]
+django = "==3.0.3"
+djangorestframework = "==3.11.0"
+django-compressor = "==2.4"
+django-constance = {version = "==2.6.0",extras = ["database"]}
+django-storages = "==1.8"
+django-extensions = "==2.2.5"
+django-kaio = "==0.14.1"
+django-robots = "==4.0"
+django-yubin = "==1.6.0"
+django-widget-tweaks = "==1.4.5"
+pytz = "==2019.3"
+boto3 = "==1.11.1"
+django-bootstrap4 = "==1.1.1"
+psycopg2-binary = "*"
+django-redis = "==4.11.0"
+emoji = "==0.5.4"
+markdown = "==3.2.1"
+django-filter = "==2.2.0"
+spotipy = "==2.10.0"
+pylast = "==3.2.1" # TODO OJO: Revisar changelog per tema caràtules àlbum
+musicbrainzngs = "==0.7.1"
+sentry-sdk = "==0.8.0"
+
+[dev-packages]
+pytest = "*"
+pytest-checkipdb = "*"
+pytest-django = "*"
+pytest-eradicate = "*"
+"pytest-flake8" = "*"
+pytest-splinter = "*"
+pytest-sugar = "*"
+pytest-xdist = "*"
+django-debug-toolbar = "*"
+ipdb = "*"
+whitenoise = "*"
+"flake8-django" = "*"
+model-bakery = "*"
