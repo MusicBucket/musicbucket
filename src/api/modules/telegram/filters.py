@@ -3,10 +3,6 @@ from django_filters import rest_framework as filters
 from telegram.models import SentSpotifyLink
 
 
-class TelegramUserFilter(filters.FilterSet):
-    pass
-
-
 class SentSpotifyLinkFilter(filters.FilterSet):
     chat__telegram_id = filters.CharFilter(lookup_expr='iexact')
     sent_by__telegram_id = filters.CharFilter(lookup_expr='iexact')
