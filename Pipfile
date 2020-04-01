@@ -26,7 +26,7 @@ emoji = "==0.5.4"
 markdown = "==3.2.1"
 django-filter = "==2.2.0"
 spotipy = "==2.10.0"
-pylast = "==3.2.1" # TODO OJO: Revisar changelog per tema caràtules àlbum
+pylast = "==3.2.1"
 musicbrainzngs = "==0.7.1"
 sentry-sdk = "==0.8.0"
 

@@ -1,0 +1,15 @@
+@import "../../../../main/static/main/scss/base";
+
+body {
+  background-color: $light-color;
+  color: white;
+}
+
+#main-logo-container {
+  padding-top: 15px;
+}
+
+#main-logo {
+  height: 30%;
+  width: 30%;
+}

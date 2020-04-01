@@ -56,6 +56,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'telegram',
         'spotify',
         'lastfm',
+        'front',
 
         # 3rd parties
         'rest_framework',

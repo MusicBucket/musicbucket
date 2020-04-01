@@ -1,5 +1,7 @@
 from django.urls import path, include
 
+app_name = 'api'
+
 urlpatterns = [
     path(r'auth', include('rest_framework.urls')),
     path(r'telegram/', include('api.modules.telegram.urls')),

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static i18n widget_tweaks %}
+
+{% block extra_title %} - {% trans "Login" %}{% endblock extra_title %}
+
+
+{% block header %}
+    <p>
+        {% trans "Enter your username and password" %}
+    </p>
+{% endblock header %}
+
+{% block content %}
+    <form role="form" method="POST">
+        {% if form.errors or form.non_field_errors %}
+            <div role="alert">{% trans "Invalid username or password" %}</div>
+        {% endif %}
+
+        <div class="form-group">
+            {% render_field form.username autofocus="autofocus" placeholder=form.username.label class+="input-field" %}
+        </div>
+
+        <div class="form-group">
+            {% render_field form.password placeholder=form.password.label class+="input-field" %}
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="#">{% trans "I forgot my password" %}</a>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="btn">{% trans "Login" %}</button>
+        </div>
+    </form>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+    <div class="text-center mt-2">
+        <a href="#" class="btn">{% trans "¿Don't have an account?" %}</a>
+    </div>
+{% endblock footer %}

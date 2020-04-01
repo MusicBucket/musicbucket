@@ -1,0 +1,80 @@
+{% load static i18n compress %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{% block keywords %}{% endblock keywords %}">
+    <meta name="description" content="{% block description %}{% endblock description %}">
+    <meta name="author" content="pauriera.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'main/img/favicon.ico' %}?v=2">
+    <title>{% block title %}MusicBucket{% block extra_title %}{% endblock extra_title %}{% endblock title %}</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    {% block css %}
+        {% compress css %}
+            <link rel="stylesheet" type="text/scss" href="{% static 'main/scss/base.scss' %}">
+        {% endcompress %}
+    {% endblock %}
+
+    {% compress css %}
+        {% block page_css %}
+            {# page specific css goes here #}
+        {% endblock page_css %}
+    {% endcompress %}
+
+
+    {# Google Analytics #}
+    <script>
+        window.ga = window.ga || function () {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src='//www.google-analytics.com/analytics.js'></script>
+</head>
+
+<body class="body">
+
+{% include "components/navbar.html" %}
+{% if messages %}
+    <div class="alerts-group">
+        {% for message in messages %}
+            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show"
+                 role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+<div class="container">
+    {% block content %}
+    {% endblock content %}
+</div>
+
+{% block modal %}{% endblock modal %}
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    {% compress js %}
+    {% endcompress %}
+{% endblock javascript %}
+
+{% block page_js %}
+    {# use this block for specific page javascript #}
+{% endblock page_js %}
+</body>
+</html>

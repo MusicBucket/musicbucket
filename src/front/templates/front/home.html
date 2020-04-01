@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static i18n compress widget_tweaks %}
+
+{% block page_css %}
+    <link rel="stylesheet" type="text/scss" href="{% static 'front/scss/home.scss' %}">
+{% endblock page_css %}
+
+{% block content %}
+    <div class="col s12 center-align">
+        <div class="row">
+            <div id="main-logo-container">
+                <img id="main-logo" src="{% static "main/img/musicbucket_logo.png" %}" alt="MusicBucket">
+            </div>
+        </div>
+        <div class="row">
+            <h1>{% trans "Welcome to MusicBucket" %}</h1>
+        </div>
+    </div>
+{% endblock content %}
