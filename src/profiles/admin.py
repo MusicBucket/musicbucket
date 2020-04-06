@@ -14,11 +14,7 @@ class UserProfileInline(admin.StackedInline):
 class UserAdmin(OriginalUserAdmin):
     """Add profile inline to original UserAdmin class"""
     inlines = [UserProfileInline, ]
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'profile_activation_date')
-
-    @staticmethod
-    def profile_activation_date(obj):
-        return obj.profile.activation_date
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
 
 
 user_model = get_user_model()

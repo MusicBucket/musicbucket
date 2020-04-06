@@ -25,6 +25,7 @@ class TelegramUser(EmojiMixin, BaseTelegramModel):
     username = models.CharField(verbose_name=_('Username'), max_length=250, blank=True)
     first_name = models.CharField(verbose_name=_('First name'), max_length=250, blank=True)
     link = models.URLField(verbose_name=_('URL'), max_length=250, blank=True, default='')
+    photo_url = models.URLField(verbose_name=_('Photo URL'), max_length=250, blank=True, default='')
 
     @classmethod
     def create_from_telegram_user(cls, telegram_user: {}):

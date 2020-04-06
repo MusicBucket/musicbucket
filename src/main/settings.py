@@ -72,6 +72,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'storages',
         'widget_tweaks',
         'bootstrap4',
+        'django_telegram_login',
     ]
 
     # HEALTH_CHECK_APPS = [
@@ -145,7 +146,6 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
     DEFAULT_FROM_EMAIL = opts.get('DEFAULT_FROM_EMAIL', 'no-reply@musicbucket.net')
 
     # Celery
-    # The default must be the same as in run-celery case in entrypoint.sh
     DJANGO_CELERY_QUEUES = opts.get('DJANGO_CELERY_QUEUES', 'musicbucket')
 
     # Constance
@@ -181,14 +181,6 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
             'rest_framework.authentication.TokenAuthentication',
         )
     }
-    # TODO: Set correct permissions
-    # REST_FRAMEWORK = {
-    #     # Use Django's standard `django.contrib.auth` permissions,
-    #     # or allow read-only access for unauthenticated users.
-    #     'DEFAULT_PERMISSION_CLASSES': [
-    #         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    #     ]
-    # }
 
     # Databases
     DATABASE_ROUTERS = ['main.db_routers.DBRouter']
@@ -213,6 +205,11 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
     # Spotify
     SPOTIFY_CLIENT_ID = opts.get('SPOTIFY_CLIENT_ID')
     SPOTIFY_CLIENT_SECRET = opts.get('SPOTIFY_CLIENT_SECRET')
+
+    # Telegram
+    TELEGRAM_BOT_NAME = opts.get('TELEGRAM_BOT_NAME')
+    TELEGRAM_BOT_TOKEN = opts.get('TELEGRAM_BOT_TOKEN')
+    TELEGRAM_LOGIN_REDIRECT_URL = opts.get('TELEGRAM_LOGIN_REDIRECT_URL')
 
 
 class Test(Base):

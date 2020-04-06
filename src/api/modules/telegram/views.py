@@ -69,3 +69,5 @@ class StatsAPIView(generics.RetrieveAPIView):
     def _get_users_with_chat_link_count(chat: TelegramChat):
         users_with_chat_link_count = TelegramUser.objects.filter(sent_links__chat=chat).annotate(sent_links_chat__count=Count('sent_links'))
         return users_with_chat_link_count
+
+
