@@ -10,8 +10,7 @@ services:
             - db
             - redis
         volumes:
-            - .:/code/
-        working_dir: /code/
+            - ./src/:/app
         env_file:
             - .env
     db:
