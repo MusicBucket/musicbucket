@@ -57,6 +57,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'spotify',
         'lastfm',
         'front',
+        'app',
 
         # 3rd parties
         'rest_framework',
@@ -71,8 +72,8 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'robots',
         'storages',
         'widget_tweaks',
-        'bootstrap4',
         'django_telegram_login',
+        'django_tables2',
     ]
 
     # HEALTH_CHECK_APPS = [

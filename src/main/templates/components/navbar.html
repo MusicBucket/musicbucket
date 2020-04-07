@@ -5,10 +5,16 @@
         <div class="container">
             <div class="nav-wrapper">
                 <a href="{% url "front:home" %}" class="brand-logo">MusicBucket</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    {#  <li><a href="#">Home</a></li> #}
-                    {#  <li><a href="#">About</a></li> #}
-                    <li><a href="{% url "profiles:login" %}">Login</a></li>
+                {% if user.is_authenticated %}
+
+                {% endif %}
+                <ul id="nav-mobile" class="right">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url "app:music" %}">{% trans "Music" %}</a></li>
+                        <li><a href="{% url "profiles:logout" %}">{% trans "Logout" %}</a></li>
+                    {% else %}
+                        <li><a href="{% url "profiles:login" %}">{% trans "Login" %}</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
