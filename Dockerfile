@@ -24,8 +24,8 @@ RUN  \
 COPY Pipfile Pipfile.lock /app/
 RUN pip install pipenv && pipenv install --system
 
-COPY package.json /node/package.json
-RUN cd /node && yarn install && cd /app
+COPY package.json yarn.lock /
+RUN cd ../ && yarn install
 
 # Copy project
 COPY . /app/
