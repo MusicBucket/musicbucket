@@ -1,5 +1,18 @@
 {
-  "dependencies": {
-    "sass": "^1.26.3"
-  }
+  "name": "musicbucket",
+  "version": "1.0.0",
+  "description": "musicbucket",
+  "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.7.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Pau Riera",
+    "url": "https://www.pauriera.com/",
+    "email": "pau.riera.forteza@gmail.com"
+  },
+  "private": false
 }

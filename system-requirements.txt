@@ -1,0 +1,6 @@
+ca-certificates
+curl
+gettext
+locales
+nodejs
+yarn
