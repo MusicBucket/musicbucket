@@ -37,7 +37,7 @@ class TelegramUser(EmojiMixin, BaseTelegramModel):
         return created_user
 
     def __str__(self) -> str:
-        return f'TelegramUser: {self.username or self.first_name} ({self.telegram_id})'
+        return self.username or self.first_name
 
 
 class TelegramChat(BaseTelegramModel):
@@ -55,7 +55,7 @@ class TelegramChat(BaseTelegramModel):
     chat_type = models.CharField(verbose_name=_('Type'), choices=TYPES, blank=True, default='', max_length=50)
 
     def __str__(self) -> str:
-        return f'TelegramChat: {self.name} ({self.telegram_id})'
+        return self.name
 
 
 class SentSpotifyLink(models.Model):

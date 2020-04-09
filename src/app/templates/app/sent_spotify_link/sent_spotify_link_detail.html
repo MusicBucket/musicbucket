@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% load static i18n compress widget_tweaks %}
+{% load render_table from django_tables2 %}
 
 {% block content %}
     <div class="col s12 center-align">
-        <div class="row">
-            <h1>Music</h1>
-        </div>
+        {{ object.pk }}
     </div>
 {% endblock content %}

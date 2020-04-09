@@ -1,0 +1,9 @@
+<div>
+    {% if record.link.link_type == "artist" %}
+        <i class="material-icons">person</i>
+    {% elif record.link.link_type == "album" %}
+        <i class="material-icons">album</i>
+    {% elif record.link.link_type == "track" %}
+        <i class="material-icons">music_note</i>
+    {% endif %}
+</div>

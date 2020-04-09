@@ -26,7 +26,8 @@ class TrackAdmin(admin.ModelAdmin):
 
 @admin.register(SpotifyLink)
 class SpotifyLinkAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'url', 'link_type', 'artist', 'album', 'track')
+    list_filter = ('link_type',)
 
 
 @admin.register(SavedSpotifyLink)

@@ -6,7 +6,12 @@ app_name = 'app'
 urlpatterns = [
     path(
         '',
-        views.MusicView.as_view(),
-        name='music'
-    )
+        views.SentSpotifyLinkListView.as_view(),
+        name='sent-spotify-link-list'
+    ),
+    path(
+        r'<int:pk>/',
+        views.SentSpotifyLinkListView.as_view(),
+        name='sent-spotify-link-list'
+    ),
 ]

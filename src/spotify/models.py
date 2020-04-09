@@ -243,6 +243,15 @@ class SpotifyLink(models.Model):
     def __str__(self):
         return f'{self.url} ({self.link_type})'
 
+    @property
+    def name(self):
+        if self.link_type == self.TYPE_ARTIST:
+            return self.artist.name
+        elif self.link_type == self.TYPE_ALBUM:
+            return self.album.name
+        elif self.link_type == self.TYPE_TRACK:
+            return self.track.name
+
     @classmethod
     def get_or_create_from_spotify_url(cls, spotify_url: str):
         spotify_client = SpotifyClient()

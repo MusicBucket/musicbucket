@@ -1,0 +1,18 @@
+<style>
+    .cover {
+        width: 35px;
+    }
+</style>
+
+<div>
+    {% if record.link.link_type == "artist" %}
+        <img src="{{ record.link.artist.image_url }}" alt="{{ record.link.artist.name }}"
+             class="responsive-img cover">
+    {% elif record.link.link_type == "album" %}
+        <img src="{{ record.link.album.image_url }}" alt="{{ record.link.album.name }}"
+             class="responsive-img cover">
+    {% elif record.link.link_type == "track" %}
+        <img src="{{ record.link.track.album.image_url }}" alt="{{ record.link.track.name }}"
+             class="responsive-img cover">
+    {% endif %}
+</div>
