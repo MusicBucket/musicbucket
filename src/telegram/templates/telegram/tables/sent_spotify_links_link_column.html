@@ -1,0 +1,12 @@
+<div>
+    {# TODO: Add a link to an artist/album/track detail page #}
+    {# TODO: In the detail page, show how many times has been sent #}
+
+    {% if record.link.link_type == "artist" %}
+        {{ record.link.artist.name }}
+    {% elif record.link.link_type == "album" %}
+        {{ record.link.album.name }}
+    {% elif record.link.link_type == "track" %}
+        {{ record.link.track.name }}
+    {% endif %}
+</div>

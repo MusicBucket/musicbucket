@@ -11,6 +11,8 @@
 {% endblock header %}
 
 {% block content %}
+    {{ telegram_login_widget|safe }}
+
     <form role="form" method="POST">
         {% if form.errors or form.non_field_errors %}
             <div role="alert">{% trans "Invalid username or password" %}</div>
@@ -31,7 +33,6 @@
             <button type="submit" class="btn">{% trans "Login" %}</button>
         </div>
     </form>
-    </div>
 {% endblock content %}
 
 {% block footer %}

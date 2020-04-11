@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static i18n compress widget_tweaks %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+    <div>
+        {% if filter %}
+            <form action="" method="get" class="col s12">
+                {% csrf_token %}
+                <div class="row">
+                    {% if filter.form.sent_by %}
+                        <div class="input-field col s4">
+                            {{ filter.form.sent_by.label_tag }}
+                            {% render_field filter.form.sent_by autofocus="autofocus" %}
+                        </div>
+                    {% endif %}
+                    {% if filter.form.chat %}
+                        <div class="input-field col s4">
+                            {{ filter.form.chat.label_tag }}
+                            {% render_field filter.form.chat autofocus="autofocus" %}
+                        </div>
+                    {% endif %}
+                    <div class="input-field col s4">
+                        <button class="btn" type="submit">{% trans "Submit" %}</button>
+                        <a class="btn" href="">{% trans "Reset" %}</a>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+
+        {% render_table table %}
+
+        {{ page_obj }}
+    </div>
+{% endblock content %}
