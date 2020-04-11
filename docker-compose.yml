@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+    web:
+        build: .
+        ports:
+            - "8000:8000"
+            - "2244:22"
+        depends_on:
+            - db
+            - redis
+        volumes:
+            - ./src/:/app
+        env_file:
+            - .env
+    db:
+        image: postgres:10
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${DATABASE_USER}
+            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+            - POSTGRES_DB=${DATABASE_NAME}
+    redis:
+        image: redis:5.0.8
+        expose:
+            - "6379"
+volumes:
+     pgdata:
