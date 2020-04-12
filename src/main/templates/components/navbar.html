@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n front_tags %}
 
 <!-- Profile Dropdown -->
 <ul id="profile-dropdown" class="dropdown-content">
@@ -23,7 +23,7 @@
                                 <i class="material-icons right">arrow_drop_down</i></a>
                         </li>
                     {% else %}
-                        <li><a href="{% url "profiles:login" %}">{% trans "Login" %}</a></li>
+                        <li>{% telegram_login_button %}</li>
                     {% endif %}
                 </ul>
             </div>
