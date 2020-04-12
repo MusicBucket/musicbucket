@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, TemplateView, ListView
+from django.views.generic import DetailView, ListView
 from django_filters import views as filter_views
 from django_tables2 import SingleTableMixin
 

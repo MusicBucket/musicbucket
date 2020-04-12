@@ -1,4 +1,4 @@
-from django.db.models import F, Subquery, OuterRef, QuerySet
+from django.db.models import F
 from django.http import Http404
 from django.utils import timezone
 from rest_framework import generics
