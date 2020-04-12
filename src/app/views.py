@@ -11,9 +11,6 @@ from telegram.tables import SentSpotifyLinkTable
 DEFAULT_PAGINATE_BY = 20
 
 
-
-
-
 class SentSpotifyLinkListView(SingleTableMixin, filter_views.FilterView):
     queryset = SentSpotifyLink.objects.all()
     model = SentSpotifyLink
