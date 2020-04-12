@@ -10,7 +10,7 @@
     <meta name="author" content="pauriera.com">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'main/img/favicon.ico' %}?v=2">
-    <title>{% block title %}MusicBucket{% block extra_title %}{% endblock extra_title %}{% endblock title %}</title>
+    <title>{% block title %}MusicBucket - {% block extra_title %}{% endblock extra_title %}{% endblock title %}</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
@@ -42,26 +42,16 @@
 </head>
 
 <body class="body">
-
-{% include "components/navbar.html" %}
-
-{% if messages %}
-    <div class="alerts-group">
-        {% for message in messages %}
-            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show"
-                 role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
+<header>
+    {% include "components/navbar.html" %}
+</header>
+<main>
+    <div>
+        {% block content %}
+        {% endblock content %}
     </div>
-{% endif %}
-<div class="container">
-    {% block content %}
-    {% endblock content %}
-</div>
+</main>
+
 
 {% block modal %}{% endblock modal %}
 
@@ -74,8 +64,14 @@
     <script type="application/javascript">
         $(document).ready(function () {
             $('select').formSelect();
+            $(".dropdown-trigger").dropdown();
+            $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
         });
+        {% if user.is_authenticated %}
+            $('.sidenav').sidenav();
+        {% endif %}
     </script>
+
     {% compress js %}
     {% endcompress %}
 {% endblock javascript %}

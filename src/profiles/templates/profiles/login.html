@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "front/base_front.html" %}
 {% load static i18n widget_tweaks %}
 
 {% block extra_title %} - {% trans "Login" %}{% endblock extra_title %}
@@ -10,7 +10,7 @@
     </p>
 {% endblock header %}
 
-{% block content %}
+{% block front %}
     {{ telegram_login_widget|safe }}
 
     <form role="form" method="POST">
@@ -33,7 +33,7 @@
             <button type="submit" class="btn">{% trans "Login" %}</button>
         </div>
     </form>
-{% endblock content %}
+{% endblock front %}
 
 {% block footer %}
     <div class="text-center mt-2">

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static compress %}
+
+{% block css %}
+    {{ block.super }}
+    {% compress css %}
+        <link rel="stylesheet" type="text/scss" href="{% static 'app/scss/base_app.scss' %}">
+    {% endcompress %}
+{% endblock css %}
+
+{% block navbar_title %}
+    Title
+{% endblock navbar_title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col s3">{% include "app/components/sidebar.html" %}</div>
+        <div class="col s9">
+            {% if messages %}
+                <div class="alerts-group">
+                    {% for message in messages %}
+                        <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show"
+                             role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% block app %}{% endblock app %}
+        </div>
+    </div>
+{% endblock content %}

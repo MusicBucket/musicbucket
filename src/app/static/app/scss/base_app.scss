@@ -1,0 +1,15 @@
+@import "../../../../main/static/main/scss/base";
+
+header, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+  header, footer {
+    padding-left: 0;
+  }
+}
+
+.sidebar-header > .user-view > .background {
+  background-color: $primary-color;
+}

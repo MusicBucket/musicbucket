@@ -28,6 +28,11 @@ class TelegramUser(EmojiMixin, BaseTelegramModel):
     photo_url = models.URLField(verbose_name=_('Photo URL'), max_length=250, blank=True, default='')
 
     @classmethod
+    def get_chats(cls, pk):
+        user_sent_links_chats_ids = SentSpotifyLink.objects.filter(sent_by_id=pk).values_list('chat_id', flat=True)
+        return TelegramChat.objects.filter(pk__in=user_sent_links_chats_ids)
+
+    @classmethod
     def create_from_telegram_user(cls, telegram_user: {}):
         created_user = cls.objects.create(
             telegram_id=telegram_user.get('id'),
@@ -64,8 +69,13 @@ class SentSpotifyLink(models.Model):
     sent_by = models.ForeignKey(
         TelegramUser, verbose_name=_('Sent by'), related_name='sent_links', on_delete=models.CASCADE
     )
-    chat = models.ForeignKey(TelegramChat, verbose_name=_('Chat'), on_delete=models.CASCADE)
-    link = models.ForeignKey(SpotifyLink, verbose_name=_('Spotify Link'), on_delete=models.CASCADE)
+    chat = models.ForeignKey(TelegramChat, verbose_name=_('Chat'), related_name='sent_links', on_delete=models.CASCADE)
+    link = models.ForeignKey(SpotifyLink, verbose_name=_('Spotify Link'), related_name='sent_links',
+                             on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Sent Spotify Link')
+        verbose_name_plural = _('Sent Spotify Links')
 
     def __str__(self):
         return f'{self.link.url}. Sent by {self.sent_by.username or self.sent_by.first_name} ({self.sent_by.id}) at {self.chat.name} ({self.chat.id})'

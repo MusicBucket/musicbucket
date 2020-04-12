@@ -252,6 +252,42 @@ class SpotifyLink(models.Model):
         elif self.link_type == self.TYPE_TRACK:
             return self.track.name
 
+    @property
+    def artist_name(self):
+        if self.link_type == self.TYPE_ARTIST:
+            return self.artist.name
+        elif self.link_type == self.TYPE_ALBUM:
+            return self.album.artists.first().name
+        elif self.link_type == self.TYPE_TRACK:
+            return self.track.artists.first().name
+
+    @property
+    def spotify_url(self):
+        if self.link_type == self.TYPE_ARTIST:
+            return self.artist.url
+        elif self.link_type == self.TYPE_ALBUM:
+            return self.album.url
+        elif self.link_type == self.TYPE_TRACK:
+            return self.track.url
+
+    @property
+    def image_url(self):
+        if self.link_type == self.TYPE_ARTIST:
+            return self.artist.image_url
+        elif self.link_type == self.TYPE_ALBUM:
+            return self.album.image_url
+        elif self.link_type == self.TYPE_TRACK:
+            return self.track.album.image_url
+
+    @property
+    def genres(self):
+        if self.link_type == self.TYPE_ARTIST:
+            return self.artist.genres
+        elif self.link_type == self.TYPE_ALBUM:
+            return self.album.genres
+        elif self.link_type == self.TYPE_TRACK:
+            return self.track.album.genres
+
     @classmethod
     def get_or_create_from_spotify_url(cls, spotify_url: str):
         spotify_client = SpotifyClient()

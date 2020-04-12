@@ -1,19 +1,32 @@
 {% load static i18n %}
 
-<div class="navbar-fixed">
-    <nav>
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="{% url "front:home" %}" class="brand-logo">MusicBucket</a>
+<!-- Profile Dropdown -->
+<ul id="profile-dropdown" class="dropdown-content">
+    <li><a href="{% url "profiles:logout" %}">{% trans "Edit profile" %}</a></li>
+    <li class="divider"></li>
+    <li><a href="{% url "profiles:logout" %}">{% trans "Logout" %}</a></li>
+</ul>
+<nav>
+    <div class="nav-wrapper">
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url "front:home" %}" class="brand-logo">
+                    {% block navbar_title %}
+                        MusicBucket
+                    {% endblock navbar_title %}
+                </a>
                 <ul id="nav-mobile" class="right">
                     {% if user.is_authenticated %}
-                        <li><a href="{% url "app:sent-spotify-link-list" %}">{% trans "Music" %}</a></li>
-                        <li><a href="{% url "profiles:logout" %}">{% trans "Logout" %}</a></li>
+                        <li><a href="{% url "app:sent-spotify-link-list" %}">{% trans "Go to the app" %}</a></li>
+                        <li>
+                            <a class="dropdown-trigger" href="#" data-target="profile-dropdown">{{ user.username }}
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
                     {% else %}
                         <li><a href="{% url "profiles:login" %}">{% trans "Login" %}</a></li>
                     {% endif %}
                 </ul>
             </div>
         </div>
-    </nav>
-</div>
+    </div>
+</nav>
