@@ -1,4 +1,4 @@
-version: '3.7'
+version: "2"
 
 services:
     web:
@@ -30,11 +30,9 @@ services:
         ports:
             - 80:80
             - 443:443
-        volumes:
-            - static:/data/static
-            - ./docker/nginx:/etc/nginx/conf.d
-            - ./docker/nginx/certbot/conf:/etc/letsencrypt
-            - ./docker/nginx/certbot/www:/var/www/certbot
+        volumes_from:
+            - web
+            - certbot
         depends_on:
             - web
         env_file:
