@@ -74,6 +74,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'widget_tweaks',
         'django_telegram_login',
         'django_tables2',
+        'crispy_forms',
     ]
 
     # HEALTH_CHECK_APPS = [
@@ -190,12 +191,12 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         databases = super().get_databases(prefix)
         databases['bot'] = {
             'ENGINE': self.get_engine(prefix),
-            'NAME': get('BOT_DATABASE_NAME'),
-            'USER': get('BOT_DATABASE_USER'),
-            'PASSWORD': get('BOT_DATABASE_PASSWORD'),
-            'HOST': get('BOT_DATABASE_HOST'),
-            'PORT': get('BOT_DATABASE_PORT'),
-            'CONN_MAX_AGE': get('BOT_DATABASE_CONN_MAX_AGE', 0),
+            'NAME': opts.get('BOT_DATABASE_NAME'),
+            'USER': opts.get('BOT_DATABASE_USER'),
+            'PASSWORD': opts.get('BOT_DATABASE_PASSWORD'),
+            'HOST': opts.get('BOT_DATABASE_HOST'),
+            'PORT': opts.get('BOT_DATABASE_PORT'),
+            'CONN_MAX_AGE': opts.get('BOT_DATABASE_CONN_MAX_AGE', 0),
         }
         return databases
 

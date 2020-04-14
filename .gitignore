@@ -5,7 +5,7 @@
 app.ini
 tests_failures/
 .vscode
-
+nginx/
 # Custom ignores
 
 
