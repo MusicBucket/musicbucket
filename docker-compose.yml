@@ -4,30 +4,52 @@ services:
     web:
         build: .
         ports:
-            - "8000:8000"
             - "2244:22"
+        expose:
+          - 8000
         depends_on:
             - db
             - redis
         volumes:
             - ./src/:/app
+            - static:/data/static
         env_file:
             - .env
     db:
-        image: postgres:10
-        ports:
-            - "5432:5432"
+        image: postgres:10.1-alpine
         volumes:
-            - pgdata:/var/lib/postgresql/data
+            - pgdata:/var/lib/postgresql/data/
         env_file:
             - .env
         environment:
             - POSTGRES_USER=${DATABASE_USER}
             - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
             - POSTGRES_DB=${DATABASE_NAME}
+    nginx:
+        build: docker/nginx
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - static:/data/static
+            - ./nginx/nginx:/etc/nginx/conf.d
+            - ./nginx/certbot/conf:/etc/letsencrypt
+            - ./nginx/certbot/www:/var/www/certbot
+        depends_on:
+            - web
+        env_file:
+            - .env
+        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    certbot:
+        image: certbot/certbot
+        volumes:
+            - ./nginx/certbot/conf:/etc/letsencrypt
+            - ./nginx/certbot/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     redis:
         image: redis:5.0.8
         expose:
             - "6379"
 volumes:
      pgdata:
+     static:
