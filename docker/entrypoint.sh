@@ -1,5 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-
-
-gunicorn --bind :8000 main.wsgi:application
+exec gunicorn --bind :8000 main.wsgi:application
