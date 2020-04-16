@@ -1,4 +1,4 @@
-{% load static i18n compress %}
+{% load static i18n compress hijack_tags %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -16,6 +16,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'hijack/hijack-styles.css' %}"/>
     {% block css %}
         {% compress css %}
             <link rel="stylesheet" type="text/scss" href="{% static 'main/scss/base.scss' %}">
@@ -46,6 +47,7 @@
     {% include "components/navbar.html" %}
 </header>
 <main>
+    {% hijack_notification %}
     <div>
         {% block content %}
         {% endblock content %}

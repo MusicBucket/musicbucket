@@ -1,4 +1,4 @@
-{% load static i18n front_tags %}
+{% load static i18n web_tags %}
 
 <!-- Profile Dropdown -->
 <ul id="profile-dropdown" class="dropdown-content">
@@ -10,14 +10,14 @@
     <div class="nav-wrapper">
         <div class="row">
             <div class="col s12">
-                <a href="{% url "front:home" %}" class="brand-logo">
+                <a href="{% url "web:home" %}" class="brand-logo">
                     {% block navbar_title %}
                         MusicBucket
                     {% endblock navbar_title %}
                 </a>
                 <ul id="nav-mobile" class="right">
                     {% if user.is_authenticated %}
-                        <li><a href="{% url "app:sent-spotify-link-list" %}">{% trans "Go to the app" %}</a></li>
+                        <li><a href="{% url "app:main" %}">{% trans "Go to the app" %}</a></li>
                         <li>
                             <a class="dropdown-trigger" href="#" data-target="profile-dropdown">{{ user.username }}
                                 <i class="material-icons right">arrow_drop_down</i></a>

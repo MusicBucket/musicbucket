@@ -1,0 +1,32 @@
+{% extends "web/base_web.html" %}
+{% load static i18n compress widget_tweaks %}
+
+{% block extra_title %}Home{% endblock extra_title %}
+
+{% block page_css %}
+    <link rel="stylesheet" type="text/scss" href="{% static 'web/scss/home.scss' %}">
+{% endblock page_css %}
+
+{% block web %}
+    <div class="col s12 center-align">
+        <div class="row">
+            <div id="main-logo-container">
+                <img id="main-logo" src="{% static "main/img/musicbucket_logo.png" %}" alt="MusicBucket">
+            </div>
+        </div>
+        <div class="row">
+            <h1>{% trans "Welcome to MusicBucket" %}</h1>
+        </div>
+        <div class="row">
+            <p>
+                {% blocktrans %}
+                    This is the front page of the MusicBucket application. You can log in with your Telegram Account
+                    and operate with the music you are tracking with MusicBucket Bot
+                {% endblocktrans %}
+            </p>
+            <p>
+                <a class="btn waves-effect waves-light" href="https://t.me/music_bucket_bot"><span class="mdi mdi-telegram"></span>@music_bucket_bot</a>
+            </p>
+        </div>
+    </div>
+{% endblock web %}

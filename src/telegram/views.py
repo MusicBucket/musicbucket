@@ -40,7 +40,7 @@ class TelegramLoginCallbackView(views.View):
             messages.info(request, _('Login successful'))
         else:
             messages.error(request, _('Error login in with Telegram'))
-        return redirect('front:home')
+        return redirect('web:home')
 
     @staticmethod
     def _link_telegram_user_to_a_new_user_profile(telegram_auth_result):
