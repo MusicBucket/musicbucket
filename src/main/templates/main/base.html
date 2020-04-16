@@ -29,7 +29,6 @@
         {% endblock page_css %}
     {% endcompress %}
 
-
     {# Google Analytics #}
     <script>
         window.ga = window.ga || function () {
@@ -44,7 +43,7 @@
 
 <body class="body">
 <header>
-    {% include "components/navbar.html" %}
+    {% include "main/components/navbar.html" %}
 </header>
 <main>
     {% hijack_notification %}
@@ -53,6 +52,10 @@
         {% endblock content %}
     </div>
 </main>
+
+<footer class="page-footer">
+    {% block footer %}{% endblock %}
+</footer>
 
 
 {% block modal %}{% endblock modal %}
