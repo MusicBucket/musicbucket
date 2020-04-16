@@ -1,7 +1,21 @@
-{% extends "base.html" %}
+{% extends "main/base.html" %}
+{% load static compress %}
+
+{% block css %}
+    {{ block.super }}
+    {% compress css %}
+        <link rel="stylesheet" type="text/scss" href="{% static 'web/scss/base_web.scss' %}">
+    {% endcompress %}
+{% endblock css %}
 
 {% block content %}
     <div class="container">
         {% block web %}{% endblock web %}
     </div>
 {% endblock content %}
+
+{% block footer %}
+    {% include "web/components/footer.html" %}
+{% endblock %}
+
+

@@ -171,9 +171,6 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
     RECAPTCHA_PUBLIC_KEY = opts.get('RECAPTCHA_PUBLIC_KEY', '')
     RECAPTCHA_PRIVATE_KEY = opts.get('RECAPTCHA_PRIVATE_KEY', '')
 
-    # django-bootstrap4
-    BOOTSTRAP4 = {'error_css_class': '', 'success_css_class': ''}
-
     # django-hijack
     HIJACK_LOGIN_REDIRECT_URL = '/'  # Where admins are redirected to after hijacking a user
     HIJACK_LOGOUT_REDIRECT_URL = '/admin/auth/user/'  # Where admins are redirected to after releasing a user
