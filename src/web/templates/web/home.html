@@ -19,13 +19,12 @@
         </div>
         <div class="row">
             <p>
-                {% blocktrans %}
-                    This is the front page of the MusicBucket application. You can log in with your Telegram Account
-                    and operate with the music you are tracking with MusicBucket Bot
-                {% endblocktrans %}
+                {% trans "This is the front page of the MusicBucket application." %}<br>
+                {% trans "You can log in with your Telegram Account and operate with the music you are tracking with MusicBucket Bot" %}
             </p>
             <p>
-                <a class="btn waves-effect waves-light" href="https://t.me/music_bucket_bot"><span class="mdi mdi-telegram"></span>@music_bucket_bot</a>
+                <a id="musicbucket-btn" class="btn btn-large waves-effect waves-light"
+                   href="https://t.me/music_bucket_bot"><span class="mdi mdi-telegram">&nbsp;</span>MusicBucket Bot</a>
             </p>
         </div>
     </div>
