@@ -17,7 +17,9 @@
                 </a>
                 <ul id="nav-mobile" class="right">
                     {% if user.is_authenticated %}
-                        <li><a href="{% url "app:main" %}">{% trans "Go to the app" %}</a></li>
+                        {% if request.resolver_match.app_name != 'app' %}
+                            <li><a href="{% url "app:main" %}">{% trans "Go to the app" %}</a></li>
+                        {% endif %}
                         <li>
                             <a class="dropdown-trigger" href="#" data-target="profile-dropdown">{{ user.username }}
                                 <i class="material-icons right">arrow_drop_down</i></a>
