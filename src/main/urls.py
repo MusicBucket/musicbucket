@@ -18,17 +18,19 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('front.urls')),
+    path('', include('web.urls')),
     path('app/', include('app.urls')),
     path('profiles/', include('profiles.urls')),
     path('telegram/', include('telegram.urls')),
     path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
+    path('hijack/', include('hijack.urls', namespace='hijack')),
 ]
 
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
