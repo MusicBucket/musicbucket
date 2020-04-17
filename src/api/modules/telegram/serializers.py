@@ -57,11 +57,11 @@ class SentSpotifyLinkSerializer(serializers.ModelSerializer):
     def get_spotify_preview_track(obj: SentSpotifyLink):
         spotify_client = SpotifyClient()
         if obj.link.link_type == SpotifyLink.TYPE_ARTIST:
-            return spotify_client.get_artist_top_track(obj.link.artist)
+            return spotify_client.get_artist_top_track(obj.link.artist.spotify_id)
         elif obj.link.link_type == SpotifyLink.TYPE_ALBUM:
-            return spotify_client.get_album_first_track(obj.link.album)
+            return spotify_client.get_album_first_track(obj.link.album.spotify_id)
         elif obj.link.link_type == SpotifyLink.TYPE_TRACK:
-            return spotify_client.client.track(obj.link.track_id)
+            return spotify_client.client.track(obj.link.track.spotify_id)
 
 
 class StatsSerializer(serializers.Serializer):
