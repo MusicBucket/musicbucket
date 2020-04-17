@@ -1,4 +1,4 @@
-{% load static i18n compress hijack_tags %}
+{% load static i18n compress hijack_tags cookielaw_tags %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'hijack/hijack-styles.css' %}"/>
     {% block css %}
         {% compress css %}
+            <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}"/>
             <link rel="stylesheet" type="text/scss" href="{% static 'main/scss/base.scss' %}">
         {% endcompress %}
     {% endblock %}
@@ -52,7 +53,7 @@
         {% endblock content %}
     </div>
 </main>
-
+{% cookielaw_banner %}
 <footer class="page-footer">
     {% block footer %}{% endblock %}
 </footer>
@@ -78,6 +79,7 @@
     </script>
 
     {% compress js %}
+        <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
     {% endcompress %}
 {% endblock javascript %}
 
