@@ -198,7 +198,7 @@ class Track(EmojiMixin, BaseSpotifyModel):
                     popularity=spotify_track.get('popularity'),
                     href=spotify_track.get('href'),
                     url=spotify_track.get('external_urls').get('spotify'),
-                    preview_url=spotify_track.get('preview_url'),
+                    preview_url=spotify_track.get('preview_url') or '',
                     uri=spotify_track.get('uri'),
                     album=album,
                 )
