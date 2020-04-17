@@ -78,6 +78,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'hijack',
         'hijack_admin',
         'compat',
+        'cookielaw',
     ]
 
     # HEALTH_CHECK_APPS = [
