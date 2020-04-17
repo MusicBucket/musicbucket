@@ -113,7 +113,7 @@ class Command(BaseCommand):
                     'url': bot_album.spotify_url,
                     'uri': bot_album.uri,
                     'popularity': bot_album.popularity,
-                    'label': bot_album.label,
+                    'label': bot_album.label or '',
                     'image_url': bot_album.image,
                     'album_type': bot_album.album_type,
                     'release_date': bot_album.release_date,
