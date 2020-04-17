@@ -5,9 +5,9 @@
         {% if record.link.link_type == "artist" %}
             {{ record.link.artist.name }}
         {% elif record.link.link_type == "album" %}
-            {{ record.link.album.name }}
+            <strong>{{ record.link.album.get_first_artist.name }}</strong> - {{ record.link.album.name }}
         {% elif record.link.link_type == "track" %}
-            {{ record.link.track.name }}
+            <strong>{{ record.link.track.get_first_artist.name }}</strong> - {{ record.link.track.name }}
         {% endif %}
 {#    </a>#}
 </div>

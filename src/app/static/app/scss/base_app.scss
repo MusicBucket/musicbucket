@@ -1,15 +1,20 @@
 @import "../../../../main/static/main/scss/base";
 
-header, footer {
+header, footer, #base-app {
   padding-left: 300px;
 }
 
 @media only screen and (max-width: 992px) {
-  header, footer {
+  header, footer, #base-app {
     padding-left: 0;
   }
 }
 
 .sidebar-header > .user-view > .background {
   background-color: $primary-color;
+}
+
+#app {
+  padding-left: 5px;
+  padding-right: 5px;
 }
