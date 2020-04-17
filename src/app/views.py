@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView
 from django_filters import views as filter_views
 from django_tables2 import SingleTableMixin
@@ -11,7 +12,11 @@ from telegram.tables import SentSpotifyLinkTable
 DEFAULT_PAGINATE_BY = 20
 
 
-class SentSpotifyLinkListView(SingleTableMixin, filter_views.FilterView):
+class BaseAppView(LoginRequiredMixin):
+    pass
+
+
+class SentSpotifyLinkListView(BaseAppView, SingleTableMixin, filter_views.FilterView):
     queryset = SentSpotifyLink.objects.all()
     model = SentSpotifyLink
     template_name = 'app/sent_spotify_link/sent_spotify_link_list.html'
@@ -27,12 +32,12 @@ class SentSpotifyLinkListView(SingleTableMixin, filter_views.FilterView):
         return queryset.order_by('-sent_at')
 
 
-class SentSpotifyLinkDetailView(DetailView):
+class SentSpotifyLinkDetailView(BaseAppView, DetailView):
     queryset = SentSpotifyLink.objects.all()
     template_name = 'app/sent_spotify_link/sent_spotify_link_detail.html'
 
 
-class SavedSpotifyLinkListView(SingleTableMixin, ListView):
+class SavedSpotifyLinkListView(BaseAppView, SingleTableMixin, ListView):
     model = SavedSpotifyLink
     template_name = 'app/saved_spotify_link/saved_spotify_link_list.html'
     table_class = SavedSpotifyLinkTable
@@ -45,14 +50,14 @@ class SavedSpotifyLinkListView(SingleTableMixin, ListView):
         return queryset.order_by('-saved_at')
 
 
-class SavedSpotifyLinkDetailView(DetailView):
+class SavedSpotifyLinkDetailView(BaseAppView, DetailView):
     template_name = 'app/saved_spotify_link/saved_spotify_link_detail.html'
 
     def get_queryset(self):
         return self.request.user.profile.telegram_user.saved_links
 
 
-class FollowedArtistListView(SingleTableMixin, ListView):
+class FollowedArtistListView(BaseAppView, SingleTableMixin, ListView):
     model = FollowedArtist
     template_name = 'app/followed_artist/followed_artist_list.html'
     table_class = FollowedArtistTable
@@ -63,7 +68,7 @@ class FollowedArtistListView(SingleTableMixin, ListView):
         return queryset.order_by('-followed_at')
 
 
-class FollowedArtistDetailView(DetailView):
+class FollowedArtistDetailView(BaseAppView, DetailView):
     template_name = 'app/followed_artist/followed_artist_detail.html'
 
     def get_queryset(self):
