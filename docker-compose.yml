@@ -3,6 +3,7 @@ version: "2"
 services:
     web:
         build: .
+        restart: "always"
         ports:
             - "2244:22"
         expose:
@@ -17,6 +18,7 @@ services:
             - .env
     db:
         image: postgres:10.1-alpine
+        restart: "always"
         volumes:
             - pgdata:/var/lib/postgresql/data/
         env_file:
@@ -27,6 +29,7 @@ services:
             - POSTGRES_DB=${DATABASE_NAME}
     nginx:
         build: docker/nginx
+        restart: "always"
         ports:
             - 80:80
             - 443:443
@@ -40,12 +43,14 @@ services:
         command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     certbot:
         image: certbot/certbot
+        restart: "always"
         volumes:
             - ./docker/nginx/certbot/conf:/etc/letsencrypt
             - ./docker/nginx/certbot/www:/var/www/certbot
         entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     redis:
         image: redis:5.0.8
+        restart: "always"
         expose:
             - "6379"
 volumes:
