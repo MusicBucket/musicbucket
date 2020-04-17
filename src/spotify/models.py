@@ -228,13 +228,13 @@ class SpotifyLink(models.Model):
     url = models.URLField(verbose_name=_('URL'), max_length=250, unique=True)
     link_type = models.CharField(verbose_name=_('Type'), choices=TYPES, max_length=250)
     artist = models.ForeignKey(
-        Artist, verbose_name=_('Artist'), related_name='links', null=True, on_delete=models.PROTECT
+        Artist, verbose_name=_('Artist'), related_name='links', null=True, on_delete=models.CASCADE
     )
     album = models.ForeignKey(
-        Album, verbose_name=_('Album'), related_name='links', null=True, on_delete=models.PROTECT
+        Album, verbose_name=_('Album'), related_name='links', null=True, on_delete=models.CASCADE
     )
     track = models.ForeignKey(
-        Track, verbose_name=_('Track'), related_name='links', null=True, on_delete=models.PROTECT
+        Track, verbose_name=_('Track'), related_name='links', null=True, on_delete=models.CASCADE
     )
     chats = models.ManyToManyField(
         'telegram.TelegramChat', verbose_name=_('Chats'), related_name='links', through='telegram.SentSpotifyLink'
