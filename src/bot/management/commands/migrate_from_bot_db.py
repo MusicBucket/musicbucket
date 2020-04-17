@@ -251,7 +251,6 @@ class Command(BaseCommand):
                 user=TelegramUser.objects.get(telegram_id=bot_followed_artist.user.id),
                 artist=Artist.objects.get(spotify_id=bot_followed_artist.artist.id),
                 followed_at=make_aware(bot_followed_artist.followed_at),
-                last_lookup=make_aware(bot_followed_artist.last_lookup),
             )
         self.stdout.write('---------- End migrating saved links')
 
