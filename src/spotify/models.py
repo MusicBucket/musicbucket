@@ -192,6 +192,7 @@ class Track(EmojiMixin, BaseSpotifyModel):
                 album = Album.get_or_create_from_spotify_album(spotify_album)
                 track = cls.objects.create(
                     spotify_id=spotify_track.get('id'),
+                    name=spotify_track.get('name'),
                     number=spotify_track.get('track_number'),
                     duration=spotify_track.get('duration_ms'),
                     explicit=spotify_track.get('explicit'),
