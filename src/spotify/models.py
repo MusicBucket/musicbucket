@@ -113,6 +113,9 @@ class Album(EmojiMixin, BaseSpotifyModel):
         if self.artists.exists():
             return self.artists.first()
 
+    def get_genres(self):
+        return self.genres.all() or self.get_first_artist().genres.all()
+
     @classmethod
     def get_or_create_from_spotify_album(cls, spotify_album: {}):
         spotify_client = SpotifyClient()
@@ -282,11 +285,11 @@ class SpotifyLink(models.Model):
     @property
     def genres(self):
         if self.link_type == self.TYPE_ARTIST:
-            return self.artist.genres
+            return self.artist.genres.all()
         elif self.link_type == self.TYPE_ALBUM:
-            return self.album.genres
+            return self.album.get_genres().all()
         elif self.link_type == self.TYPE_TRACK:
-            return self.track.album.genres
+            return self.track.album.get_genres()
 
     @classmethod
     def get_or_create_from_spotify_url(cls, spotify_url: str):

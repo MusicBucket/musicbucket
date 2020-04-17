@@ -22,8 +22,10 @@ urlpatterns = [
     path('app/', include('app.urls')),
     path('profiles/', include('profiles.urls')),
     path('telegram/', include('telegram.urls')),
+    path('spotify/', include('spotify.urls')),
     path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
+    path('hijack/', include('hijack.urls', namespace='hijack')),
 ]
 
 if settings.DEBUG:

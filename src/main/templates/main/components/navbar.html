@@ -1,15 +1,19 @@
 {% load static i18n web_tags %}
 
+
 <!-- Profile Dropdown -->
 <ul id="profile-dropdown" class="dropdown-content">
-    <li><a href="{% url "profiles:logout" %}">{% trans "Edit profile" %}</a></li>
-    <li class="divider"></li>
+{#    <li><a href="{% url "profiles:logout" %}">{% trans "Edit profile" %}</a></li>#}
+{#    <li class="divider"></li>#}
     <li><a href="{% url "profiles:logout" %}">{% trans "Logout" %}</a></li>
 </ul>
 <nav>
     <div class="nav-wrapper">
         <div class="row">
             <div class="col s12">
+                {% if request.resolver_match.app_name == 'app' %}
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                {% endif %}
                 <a href="{% url "web:home" %}" class="brand-logo">
                     {% block navbar_title %}
                         MusicBucket
@@ -22,7 +26,8 @@
                         {% endif %}
                         <li>
                             <a class="dropdown-trigger" href="#" data-target="profile-dropdown">{{ user.username }}
-                                <i class="material-icons right">arrow_drop_down</i></a>
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
                         </li>
                     {% else %}
                         <li>{% telegram_login_button %}</li>

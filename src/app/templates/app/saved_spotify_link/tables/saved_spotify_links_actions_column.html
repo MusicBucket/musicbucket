@@ -1,0 +1,8 @@
+<div>
+    <form action="{% url "spotify:saved-spotify-link-delete" pk=record.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-small btn-flat waves-effect waves-light">
+            <i class="material-icons tiny">delete</i>
+        </button>
+    </form>
+</div>
