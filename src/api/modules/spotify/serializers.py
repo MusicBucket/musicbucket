@@ -80,12 +80,6 @@ class SavedSpotifyLinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = SavedSpotifyLink
         fields = '__all__'
-        validators = [
-            UniqueTogetherValidator(
-                queryset=FollowedArtist.objects.all(),
-                fields=['link_id', 'user_id']
-            )
-        ]
 
 
 class FollowedArtistSerializer(serializers.ModelSerializer):
