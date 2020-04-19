@@ -8,7 +8,7 @@ urlpatterns = [
         name='now-playing'
     ),
     path(
-        'users/set-lastfm-user/<str:user__telegram_id>/',
+        'users/set-lastfm-user/',
         views.LastfmUserCreateUpdateAPIView.as_view(),
         name='user-retrieve-update-destroy'
     ),
