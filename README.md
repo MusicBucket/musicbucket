@@ -9,6 +9,7 @@ can setup to take advantage of all the bot functionalities.
 
 It also allows you to track and manage your bot interactions. 
 
+Check it out at https://musicbucket.net
 
 ## Special thanks
 
