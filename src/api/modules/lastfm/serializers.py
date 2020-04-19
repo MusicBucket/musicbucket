@@ -6,6 +6,7 @@ from lastfm.models import LastfmUser
 
 class LastfmUserSerializer(serializers.ModelSerializer):
     user = TelegramUserSerializer(read_only=True)
+    user_id = serializers.CharField(write_only=True)
 
     class Meta:
         model = LastfmUser
