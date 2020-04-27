@@ -44,9 +44,9 @@ class NowPlayingAPIView(generics.RetrieveAPIView):
         track = now_playing_data.get('track')
 
         if album:
-            results = spotify_client.search_link(album, SpotifyLink.TYPE_ALBUM)
+            results = spotify_client.search_links(album, SpotifyLink.TYPE_ALBUM)
         else:
-            results = spotify_client.search_link(track, SpotifyLink.TYPE_TRACK)
+            results = spotify_client.search_links(track, SpotifyLink.TYPE_TRACK)
         if results:
             candidate_url = results[0]['external_urls']['spotify']
             return candidate_url
