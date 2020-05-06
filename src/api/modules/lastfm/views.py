@@ -17,10 +17,12 @@ class NowPlayingAPIView(generics.RetrieveAPIView):
 
     def get_object(self):
         telegram_user = get_object_or_404(TelegramUser, telegram_id=self.kwargs.get('user__telegram_id'))
-        lastfm_user = telegram_user.lastfm_user
-        lastfm_client = LastfmClient()
-
-        now_playing_data = lastfm_client.now_playing(lastfm_user.username)
+        now_playing_data = None
+        try:
+            lastfm_user = telegram_user.lastfm_user
+            now_playing_data = LastfmClient().now_playing(lastfm_user.username)
+        except LastfmUser.DoesNotExist:
+            lastfm_user = None
 
         data = {
             'is_playing_now': False,
