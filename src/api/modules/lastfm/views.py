@@ -31,9 +31,9 @@ class NowPlayingAPIView(generics.RetrieveAPIView):
         if now_playing_data:
             data.update({
                 'is_playing_now': True,
-                'artist_name': now_playing_data.get('artist').name,
-                'album_name': now_playing_data.get('album').title,
-                'track_name': now_playing_data.get('track').title,
+                'artist_name': now_playing_data.get('artist').name if now_playing_data.get('artist') else None,
+                'album_name': now_playing_data.get('album').title if now_playing_data.get('album') else None,
+                'track_name': now_playing_data.get('track').title if now_playing_data.get('track') else None,
                 'cover': now_playing_data.get('cover'),
                 'url_candidate': self._search_for_candidate_spotify_url(now_playing_data)
             })
