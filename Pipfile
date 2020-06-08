@@ -7,7 +7,7 @@ verify_ssl = true
 python_version = "3.7"
 
 [packages]
-django = "==3.0.3"
+django = "==3.0.7"
 djangorestframework = "==3.11.0"
 django-compressor = "==2.4"
 django-constance = {version = "==2.6.0",extras = ["database"]}
