@@ -66,9 +66,10 @@ class SentSpotifyLinkSerializer(serializers.ModelSerializer):
 
 class StatsSerializer(serializers.Serializer):
     users_with_chat_link_count = TelegramUserSerializer(many=True)
+    most_sent_genres = serializers.ListField()
 
     class Meta:
-        fields = ['users_with_chat_link_count']
+        fields = ['users_with_chat_link_count', 'most_sent_genres']
 
     def create(self, validated_data):
         """UNUSED: This serializer is only used for querying operations"""
