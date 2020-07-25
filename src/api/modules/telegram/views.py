@@ -83,6 +83,7 @@ class StatsAPIView(generics.RetrieveAPIView):
         links = SpotifyLink.objects.prefetch_related('sent_links').filter(sent_links__chat=chat)
         genres = []
         for link in links:
-            genres.extend([genre.name for genre in link.genres])
+            if link.genres:
+                genres.extend([genre.name for genre in link.genres])
         most_sent_genres = collections.Counter(genres).most_common()
         return dict(most_sent_genres[:cls.MOST_SENT_GENRES_NUM])
