@@ -68,16 +68,8 @@ class LastfmUserCreateUpdateAPIView(rf_mixins.UpdateModelMixin, generics.CreateA
         return self.create(request, *args, **kwargs)
 
     def get_queryset(self):
-        lastfm_user = LastfmUser.objects.filter(user_id=self.kwargs.get('user_id'))
+        lastfm_user = LastfmUser.objects.filter(user_id=self.request.data.get('user_id'))
         return lastfm_user
 
-    # @staticmethod
-    # def _check_telegram_user_exists(user__telegram_id: str) -> TelegramUser:
-    #     """
-    #     Method that ensures that the requested TelegramUser exists
-    #     before creating or updating the Lastfm registry
-    #     """
-    #     try:
-    #         return TelegramUser.objects.get(telegram_id=user__telegram_id)
-    #     except TelegramUser.DoesNotExist:
-    #         raise PermissionDenied
+    def get_object(self):
+        return LastfmUser.objects.get(user_id=self.request.data.get('user_id'))
