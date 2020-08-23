@@ -1,10 +1,10 @@
+from django.http import Http404
 from rest_framework import generics
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework import mixins as rf_mixins
 
 from api.modules.lastfm.client import LastfmClient
-from api.modules.lastfm.serializers import NowPlayingSerializer, LastfmUserSerializer
+from api.modules.lastfm.serializers import NowPlayingSerializer, LastfmUserSerializer, TopAlbumsSerializer
 from lastfm.models import LastfmUser
 from spotify.client import SpotifyClient
 from spotify.models import SpotifyLink
@@ -52,6 +52,28 @@ class NowPlayingAPIView(generics.RetrieveAPIView):
         if results:
             candidate_url = results[0]['external_urls']['spotify']
             return candidate_url
+
+
+class TopAlbumsView(generics.RetrieveAPIView):
+    serializer_class = TopAlbumsSerializer
+    http_method_names = ['get']
+
+    def get_object(self):
+        telegram_user = get_object_or_404(TelegramUser, telegram_id=self.kwargs.get('user__telegram_id'))
+        try:
+            lastfm_user = telegram_user.lastfm_user
+            top_albums = LastfmClient().get_top_albums(lastfm_user.username)
+        except LastfmUser.DoesNotExist:
+            raise Http404
+        top_albums_data = {
+            'lastfm_username' : lastfm_user.username,
+            'top_albums': [{
+                'artist': item.item.artist.name,
+                'title': item.item.title,
+                'scrobbles': item.weight
+            } for item in top_albums]
+        }
+        return top_albums_data
 
 
 class LastfmUserCreateUpdateAPIView(rf_mixins.UpdateModelMixin, generics.CreateAPIView):

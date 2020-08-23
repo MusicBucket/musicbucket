@@ -29,3 +29,8 @@ class LastfmClient:
             'cover': cover
         }
         return data
+
+    def get_top_albums(self, username: str, period=pylast.PERIOD_7DAYS):
+        top_albums = self.network.get_user(username).get_top_albums(period)
+        return top_albums
+
