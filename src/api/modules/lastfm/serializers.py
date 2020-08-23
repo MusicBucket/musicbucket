@@ -32,3 +32,19 @@ class NowPlayingSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         """UNUSED: This serializer is only used for querying operations"""
         pass
+
+
+class TopAlbumsSerializer(serializers.Serializer):
+    lastfm_username = serializers.CharField(read_only=True, allow_null=True)
+    top_albums = serializers.ListField(read_only=True)
+
+    class Meta:
+        fields = ['lastfm_username', 'top_albums']
+
+    def create(self, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass
+
+    def update(self, instance, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass

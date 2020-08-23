@@ -81,6 +81,16 @@ class SavedSpotifyLinkSerializer(serializers.ModelSerializer):
         model = SavedSpotifyLink
         fields = '__all__'
 
+    def create(self, validated_data):
+        """Because of unique together with link_id and user_id, we should validate if register already exists in DB"""
+        try:
+            return SpotifyLink.objects.get(
+                link__id=validated_data.get('link_id'),
+                user__id=validated_data.get('user_id')
+            )
+        except SavedSpotifyLink.DoesNotExist:
+            return super().create(validated_data)
+
 
 class FollowedArtistSerializer(serializers.ModelSerializer):
     # Read fields
