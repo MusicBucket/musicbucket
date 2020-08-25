@@ -35,11 +35,43 @@ class NowPlayingSerializer(serializers.Serializer):
 
 
 class TopAlbumsSerializer(serializers.Serializer):
-    lastfm_username = serializers.CharField(read_only=True, allow_null=True)
+    lastfm_user = LastfmUserSerializer(allow_null=True, read_only=True)
     top_albums = serializers.ListField(read_only=True)
 
     class Meta:
-        fields = ['lastfm_username', 'top_albums']
+        fields = ['lastfm_user', 'top_albums']
+
+    def create(self, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass
+
+    def update(self, instance, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass
+
+
+class TopArtistsSerializer(serializers.Serializer):
+    lastfm_user = LastfmUserSerializer(allow_null=True, read_only=True)
+    top_artists = serializers.ListField(read_only=True)
+
+    class Meta:
+        fields = ['lastfm_user', 'top_artists']
+
+    def create(self, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass
+
+    def update(self, instance, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass
+
+
+class TopTracksSerializer(serializers.Serializer):
+    lastfm_user = LastfmUserSerializer(allow_null=True, read_only=True)
+    top_tracks = serializers.ListField(read_only=True)
+
+    class Meta:
+        fields = ['lastfm_user', 'top_tracks']
 
     def create(self, validated_data):
         """UNUSED: This serializer is only used for querying operations"""

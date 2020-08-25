@@ -34,3 +34,10 @@ class LastfmClient:
         top_albums = self.network.get_user(username).get_top_albums(period)
         return top_albums
 
+    def get_top_artists(self, username: str, period=pylast.PERIOD_7DAYS):
+        top_artists = self.network.get_user(username).get_top_artists(period)
+        return top_artists
+
+    def get_top_tracks(self, username: str, period=pylast.PERIOD_7DAYS):
+        top_tracks = self.network.get_user(username).get_top_tracks(period)
+        return top_tracks

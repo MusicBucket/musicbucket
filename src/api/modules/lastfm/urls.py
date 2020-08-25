@@ -10,7 +10,17 @@ urlpatterns = [
     path(
         'users/<str:user__telegram_id>/top-albums/',
         views.TopAlbumsView.as_view(),
-        name='user-stats'
+        name='top-albums'
+    ),
+    path(
+        'users/<str:user__telegram_id>/top-artists/',
+        views.TopArtistsView.as_view(),
+        name='top-artists'
+    ),
+    path(
+        'users/<str:user__telegram_id>/top-tracks/',
+        views.TopTracksView.as_view(),
+        name='top-tracks'
     ),
     path(
         'users/set-lastfm-user/',

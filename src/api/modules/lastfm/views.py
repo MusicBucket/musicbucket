@@ -4,7 +4,8 @@ from rest_framework.generics import get_object_or_404
 from rest_framework import mixins as rf_mixins
 
 from api.modules.lastfm.client import LastfmClient
-from api.modules.lastfm.serializers import NowPlayingSerializer, LastfmUserSerializer, TopAlbumsSerializer
+from api.modules.lastfm.serializers import NowPlayingSerializer, LastfmUserSerializer, TopAlbumsSerializer, \
+    TopArtistsSerializer, TopTracksSerializer
 from lastfm.models import LastfmUser
 from spotify.client import SpotifyClient
 from spotify.models import SpotifyLink
@@ -60,13 +61,14 @@ class TopAlbumsView(generics.RetrieveAPIView):
 
     def get_object(self):
         telegram_user = get_object_or_404(TelegramUser, telegram_id=self.kwargs.get('user__telegram_id'))
+        top_albums = []
         try:
             lastfm_user = telegram_user.lastfm_user
             top_albums = LastfmClient().get_top_albums(lastfm_user.username)
         except LastfmUser.DoesNotExist:
-            raise Http404
+            lastfm_user = None
         top_albums_data = {
-            'lastfm_username' : lastfm_user.username,
+            'lastfm_user': lastfm_user,
             'top_albums': [{
                 'artist': item.item.artist.name,
                 'title': item.item.title,
@@ -74,6 +76,51 @@ class TopAlbumsView(generics.RetrieveAPIView):
             } for item in top_albums]
         }
         return top_albums_data
+
+
+class TopArtistsView(generics.RetrieveAPIView):
+    serializer_class = TopArtistsSerializer
+    http_method_names = ['get']
+
+    def get_object(self):
+        telegram_user = get_object_or_404(TelegramUser, telegram_id=self.kwargs.get('user__telegram_id'))
+        top_artists = []
+        try:
+            lastfm_user = telegram_user.lastfm_user
+            top_artists = LastfmClient().get_top_artists(lastfm_user.username)
+        except LastfmUser.DoesNotExist:
+            lastfm_user = None
+        top_artists_data = {
+            'lastfm_user': lastfm_user,
+            'top_artists': [{
+                'name': item.item.name,
+                'scrobbles': item.weight
+            } for item in top_artists]
+        }
+        return top_artists_data
+
+
+class TopTracksView(generics.RetrieveAPIView):
+    serializer_class = TopTracksSerializer
+    http_method_names = ['get']
+
+    def get_object(self):
+        telegram_user = get_object_or_404(TelegramUser, telegram_id=self.kwargs.get('user__telegram_id'))
+        top_tracks = []
+        try:
+            lastfm_user = telegram_user.lastfm_user
+            top_tracks = LastfmClient().get_top_tracks(lastfm_user.username)
+        except LastfmUser.DoesNotExist:
+            lastfm_user = None
+        top_tracks_data = {
+            'lastfm_user': lastfm_user,
+            'top_tracks': [{
+                'artist': item.item.artist.name,
+                'title': item.item.title,
+                'scrobbles': item.weight
+            } for item in top_tracks]
+        }
+        return top_tracks_data
 
 
 class LastfmUserCreateUpdateAPIView(rf_mixins.UpdateModelMixin, generics.CreateAPIView):
