@@ -35,7 +35,8 @@ django-tables2 = "==2.3.1"
 gunicorn = "==20.0.4"
 django-hijack = "==2.1.10"
 django-hijack-admin = "==2.1.10"
-django-cookie-law = "===2.0.3"
+django-cookie-law = "==2.0.3"
+whitenoise = "==5.2.0"
 
 [dev-packages]
 pytest = "*"
