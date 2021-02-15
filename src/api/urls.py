@@ -7,5 +7,6 @@ urlpatterns = [
     path(r'telegram/', include('api.modules.telegram.urls')),
     path(r'spotify/', include('api.modules.spotify.urls')),
     path(r'lastfm/', include('api.modules.lastfm.urls')),
+    path(r'web/', include('api.modules.web.urls')),
     # path(r'profiles/', include('api.modules.profiles.urls')),
 ]

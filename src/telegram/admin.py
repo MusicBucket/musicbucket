@@ -16,4 +16,5 @@ class TelegramChatAdmin(admin.ModelAdmin):
 
 @admin.register(SentSpotifyLink)
 class SentSpotifyLinkAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'sent_at']
     list_filter = ('link__link_type',)
