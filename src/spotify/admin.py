@@ -2,26 +2,46 @@ from django.contrib import admin
 from spotify.models import Genre, Artist, Album, Track, SpotifyLink, FollowedArtist, SavedSpotifyLink
 
 
-# Register your models here.
-
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
 
 
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'url', 'get_genres',)
+
+    def get_genres(self, obj):
+        return ", ".join([genre.name for genre in obj.genres.all()])
+
+    get_genres.short_description = 'Genres'
 
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'url', 'get_artists', 'get_genres',)
+    search_fields = ('name', 'artist__name',)
+    list_filter = ('album_type',)
+
+    def get_artists(self, obj):
+        return ", ".join([artist.name for artist in obj.artists.all()])
+
+    def get_genres(self, obj):
+        return ", ".join([genre.name for genre in obj.genres.all()])
+
+    get_artists.short_description = 'Artists'
+    get_genres.short_description = 'Genres'
 
 
 @admin.register(Track)
 class TrackAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'url', 'album', 'get_artists', 'preview_url',)
+    search_fields = ('name', 'album__name',)
+
+    def get_artists(self, obj):
+        return ", ".join([artist.name for artist in obj.artists.all()])
+
+    get_artists.short_description = 'Artists'
 
 
 @admin.register(SpotifyLink)
