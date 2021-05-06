@@ -39,7 +39,7 @@ RUN cd /node && yarn install && cd /app
 # Copy project
 COPY src/ .
 COPY docker/entrypoint.sh /entrypoint.sh
-COPY docker/app.docker.ini /app/app.ini
+COPY docker/app.docker.ini ./app.ini
 COPY docker/app.docker.ini /srv/app.ini
 
 RUN mkdir -p /app/main/static && cd /app/main/static/ && yarn install && cd /app
