@@ -5,9 +5,7 @@ services:
         build: .
         restart: "always"
         ports:
-            - "2244:22"
-        expose:
-          - 8000
+            - "8000:8000"
         depends_on:
             - db
             - redis
@@ -27,20 +25,6 @@ services:
             - POSTGRES_USER=${DATABASE_USER}
             - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
             - POSTGRES_DB=${DATABASE_NAME}
-    nginx:
-        build: docker/nginx
-        restart: "always"
-        ports:
-            - 80:80
-            - 443:443
-        volumes_from:
-            - web
-            - certbot
-        depends_on:
-            - web
-        env_file:
-            - .env
-        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     certbot:
         image: certbot/certbot
         restart: "always"
