@@ -3,6 +3,7 @@
 *.sqlite
 *.geany
 app.ini
+docker/app.docker.ini
 tests_failures/
 .vscode
 nginx/
