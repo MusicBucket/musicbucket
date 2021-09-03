@@ -1,5 +1,7 @@
 import pylast
+from PIL.Image import Image
 from django.conf import settings
+from lastfmcollagegenerator.collage_generator import CollageGenerator
 
 
 class LastfmClient:
@@ -41,3 +43,12 @@ class LastfmClient:
     def get_top_tracks(self, username: str, period=pylast.PERIOD_7DAYS):
         top_tracks = self.network.get_user(username).get_top_tracks(period)
         return top_tracks
+
+    @staticmethod
+    def generate_collage(username: str, cols: int, rows: int, period: str = pylast.PERIOD_7DAYS) -> Image:
+        collage_generator = CollageGenerator(
+            lastfm_api_key=settings.LASTFM_API_KEY,
+            lastfm_api_secret=settings.LASTFM_API_SECRET
+        )
+        image = collage_generator.generate_top_albums_collage(username, cols, rows, period)
+        return image

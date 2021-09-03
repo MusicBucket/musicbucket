@@ -1,4 +1,5 @@
-from django.http import Http404
+import pylast
+from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework import mixins as rf_mixins
@@ -53,6 +54,24 @@ class NowPlayingAPIView(generics.RetrieveAPIView):
         if results:
             candidate_url = results[0]['external_urls']['spotify']
             return candidate_url
+
+
+class CollageAPIView(generics.GenericAPIView):
+    http_method_names = ['get']
+
+    def get(self, request, *args, **kwargs):
+        # TODO: Parameter validation
+        telegram_user = get_object_or_404(TelegramUser, telegram_id=self.kwargs.get('user__telegram_id'))
+        lastfm_user = telegram_user.lastfm_user
+        query_params = self.request.query_params.copy()
+        image = LastfmClient.generate_collage(
+            lastfm_user.username, period=query_params.get("period", pylast.PERIOD_7DAYS),
+            rows=int(query_params.get("rows", 5)),
+            cols=int(query_params.get("cols", 5))
+        )
+        response = HttpResponse(content_type="image/png")
+        image.save(response, "png")
+        return response
 
 
 class TopAlbumsView(generics.RetrieveAPIView):

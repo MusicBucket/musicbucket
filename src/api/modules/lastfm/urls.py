@@ -8,6 +8,11 @@ urlpatterns = [
         name='now-playing'
     ),
     path(
+        'collage/<str:user__telegram_id>/',
+        views.CollageAPIView.as_view(),
+        name='collage'
+    ),
+    path(
         'users/<str:user__telegram_id>/top-albums/',
         views.TopAlbumsView.as_view(),
         name='top-albums'
