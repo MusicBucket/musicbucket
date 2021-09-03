@@ -220,10 +220,6 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
     TELEGRAM_BOT_TOKEN = opts.get('TELEGRAM_BOT_TOKEN')
     TELEGRAM_LOGIN_REDIRECT_URL = opts.get('TELEGRAM_LOGIN_REDIRECT_URL')
 
-    # Sentry
-    SENTRY_ENABLED = opts.get("SENTRY_ENABLED")
-    SENTRY_DSN = opts.get("SENTRY_DSN")
-
 
 class Test(Base):
     """
