@@ -38,7 +38,7 @@ django-hijack = "==2.1.10"
 django-hijack-admin = "==2.1.10"
 django-cookie-law = "==2.0.3"
 whitenoise = "==5.2.0"
-lastfmcollagegenerator = "*"
+lastfmcollagegenerator = "==0.1.1"
 
 [dev-packages]
 pytest = "*"
