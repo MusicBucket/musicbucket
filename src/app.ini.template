@@ -71,7 +71,7 @@ AWS_QUERYSTRING_AUTH        = False
 [Spotify]
 SPOTIFY_CLIENT_ID           =
 SPOTIFY_CLIENT_SECRET       =
-
+SPOTIFY_REDIRECT_URI        =
 [Lastfm]
 LASTFM_API_KEY          =
 LASTFM_API_SECRET       =
