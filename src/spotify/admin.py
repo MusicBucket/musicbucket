@@ -1,5 +1,6 @@
 from django.contrib import admin
-from spotify.models import Genre, Artist, Album, Track, SpotifyLink, FollowedArtist, SavedSpotifyLink
+from spotify.models import Genre, Artist, Album, Track, SpotifyLink, FollowedArtist, SavedSpotifyLink, SpotifyUser, \
+    SpotifyTokensSet
 
 
 @admin.register(Genre)
@@ -57,4 +58,24 @@ class SavedSpotifyLinkAdmin(admin.ModelAdmin):
 
 @admin.register(FollowedArtist)
 class FollowedArtistAdmin(admin.ModelAdmin):
+    pass
+
+
+class SpotifyTokensSetInline(admin.StackedInline):
+    model = SpotifyTokensSet
+    can_delete = False
+
+
+@admin.register(SpotifyUser)
+class SpotifyUserAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'display_name', 'email', 'get_profile_user_username',)
+    search_fields = ('display_name', 'email',)
+    inlines = [SpotifyTokensSetInline, ]
+
+    def get_profile_user_username(self, obj):
+        return obj.profile.user.username
+
+
+@admin.register(SpotifyTokensSet)
+class SpotifyTokensSetAdmin(admin.ModelAdmin):
     pass

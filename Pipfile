@@ -39,6 +39,7 @@ django-hijack-admin = "==2.1.10"
 django-cookie-law = "==2.0.3"
 whitenoise = "==5.2.0"
 lastfmcollagegenerator = "==0.1.1"
+django-cors-headers = "==3.10.*"
 
 [dev-packages]
 pytest = "*"

@@ -25,6 +25,9 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
     SITE_ID = 1
     SECRET_KEY = opts.get('SECRET_KEY', 'key')
 
+    # django-cors-headers
+    CORS_ALLOW_ALL_ORIGINS = True
+
     USE_I18N = True
     USE_L10N = True
     USE_TZ = True
@@ -79,6 +82,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'hijack_admin',
         'compat',
         'cookielaw',
+        'corsheaders',
     ]
 
     # HEALTH_CHECK_APPS = [
@@ -98,6 +102,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'whitenoise.middleware.WhiteNoiseMiddleware',
         'django.middleware.locale.LocaleMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -214,6 +219,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
     # Spotify
     SPOTIFY_CLIENT_ID = opts.get('SPOTIFY_CLIENT_ID')
     SPOTIFY_CLIENT_SECRET = opts.get('SPOTIFY_CLIENT_SECRET')
+    SPOTIFY_REDIRECT_URI = opts.get('SPOTIFY_REDIRECT_URI')
 
     # Telegram
     TELEGRAM_BOT_NAME = opts.get('TELEGRAM_BOT_NAME')

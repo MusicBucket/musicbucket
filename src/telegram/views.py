@@ -44,20 +44,25 @@ class TelegramLoginCallbackView(views.View):
 
     @staticmethod
     def _link_telegram_user_to_a_new_user_profile(telegram_auth_result):
-        telegram_user, _ = TelegramUser.objects.update_or_create(telegram_id=telegram_auth_result.get('id'),
-                                                                 defaults={
-                                                                     'username': telegram_auth_result.get('username'),
-                                                                     'first_name': telegram_auth_result.get(
-                                                                         'first_name'),
-                                                                     'photo_url': telegram_auth_result.get('photo_url'),
-                                                                 })
+        telegram_user, _ = TelegramUser.objects.update_or_create(
+            telegram_id=telegram_auth_result.get('id'),
+            defaults={
+                'username': telegram_auth_result.get('username'),
+                'first_name': telegram_auth_result.get(
+                    'first_name'),
+                'photo_url': telegram_auth_result.get('photo_url'),
+            }
+        )
         profile = telegram_user.profile
         if not profile:
-            generated_password = get_user_model().objects.make_random_password()
-            user, _ = get_user_model().objects.get_or_create(username=telegram_user.username,
-                                                             defaults={'password': generated_password})
+            user_model = get_user_model()
+            generated_password = user_model.objects.make_random_password()
+            user, _ = user_model.objects.get_or_create(
+                username=telegram_user.username,
+                defaults={'password': generated_password}
+            )
             profile, _ = Profile.objects.get_or_create(user_id=user.pk)
             telegram_user.profile = profile
-            telegram_user.save()
+            telegram_user.save(update_fields=['profile'])
             return user
         return profile.user

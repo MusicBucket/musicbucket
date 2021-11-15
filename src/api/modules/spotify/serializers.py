@@ -125,3 +125,22 @@ class SearchResultSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         """UNUSED: This serializer is only used for querying operations"""
         pass
+
+
+class SpotifyRegisterSerializer(serializers.Serializer):
+    access_token = serializers.CharField(allow_null=False)
+    refresh_token = serializers.CharField(allow_null=False)
+    token_type = serializers.CharField(allow_null=False)
+    expires_in = serializers.CharField(allow_null=False)
+    scope = serializers.CharField(allow_null=False)
+
+    class Meta:
+        fields = '__all__'
+
+    def create(self, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass
+
+    def update(self, instance, validated_data):
+        """UNUSED: This serializer is only used for querying operations"""
+        pass

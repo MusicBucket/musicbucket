@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from django.utils.translation import gettext_lazy as _
 
+from profiles.models import Profile
 from spotify.client import SpotifyClient
 from telegram.mixins import EmojiMixin
 
@@ -368,3 +369,49 @@ class FollowedArtist(models.Model):
 
     def __str__(self):
         return f'{self.artist.name} followed by {self.user.username or self.user.first_name} ({self.user_id})'
+
+
+class SpotifyUser(models.Model):
+    profile = models.OneToOneField(
+        Profile,
+        verbose_name=_('Profile'), related_name='spotify_user', null=True, on_delete=models.CASCADE
+    )
+    spotify_id = models.CharField(verbose_name=_('Spotify ID'), max_length=250, unique=True)
+    email = models.EmailField(verbose_name=_('Email'))
+    display_name = models.CharField(verbose_name=_('Display name'), max_length=250)
+    country = models.CharField(verbose_name=_('Country'), max_length=100)
+    href = models.URLField(verbose_name=_('Spotify API Href'), max_length=250, blank=True)
+    url = models.URLField(verbose_name=_('Spotify URL'), max_length=250, blank=True)
+    uri = models.CharField(verbose_name=_('URI'), max_length=250)
+    image_url = models.URLField(verbose_name=_('Image'), max_length=250, blank=True)
+    followers = models.IntegerField(verbose_name=_('Followers'), blank=True, null=True)
+    type = models.CharField(verbose_name=_('Type'), max_length=100, blank=True)
+    product = models.CharField(verbose_name=_('Product'), max_length=100, blank=True)
+    created_at = models.DateTimeField(verbose_name=_('Created at'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Spotify User')
+        verbose_name_plural = _('Spotify Users')
+
+    def __str__(self):
+        return self.display_name or self.email
+
+
+class SpotifyTokensSet(models.Model):
+    user = models.OneToOneField(
+        SpotifyUser,
+        verbose_name=_('User'), related_name='tokens', null=True, on_delete=models.CASCADE
+    )
+    refresh_token = models.CharField(verbose_name=_('Refresh token'), max_length=250)
+    access_token = models.CharField(verbose_name=_('Access token'), max_length=250)
+    expires_in = models.DateTimeField(verbose_name=_('Expires in'))
+    token_type = models.CharField(verbose_name=_('Token type'), max_length=50)
+    created_at = models.DateTimeField(verbose_name=_('Created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name=_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _('Spotify Tokens Set')
+        verbose_name_plural = _('Spotify Tokens Sets')
+
+    def __str__(self):
+        return self.user.display_name or self.user.email

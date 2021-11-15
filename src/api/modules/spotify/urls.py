@@ -71,5 +71,20 @@ urlpatterns = [
         'search/',
         views.SearchListAPIView.as_view(),
         name='search',
-    )
+    ),
+    path(
+        'get-auth-url/',
+        views.AuthURLView.as_view(),
+        name='auth'
+    ),
+    path(
+        'auth-callback/',
+        views.AuthCallbackView.as_view(),
+        name='auth-callback'
+    ),
+    path(
+        'register/',
+        views.RegisterView.as_view(),
+        name='register'
+    ),
 ]
