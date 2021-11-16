@@ -47,10 +47,10 @@ class TelegramLoginCallbackView(views.View):
         telegram_user, _ = TelegramUser.objects.update_or_create(
             telegram_id=telegram_auth_result.get('id'),
             defaults={
-                'username': telegram_auth_result.get('username'),
+                'username': telegram_auth_result.get('username', ''),
                 'first_name': telegram_auth_result.get(
-                    'first_name'),
-                'photo_url': telegram_auth_result.get('photo_url'),
+                    'first_name', ''),
+                'photo_url': telegram_auth_result.get('photo_url', ''),
             }
         )
         profile = telegram_user.profile
