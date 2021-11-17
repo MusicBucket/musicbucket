@@ -246,7 +246,7 @@ class RegisterView(generics.GenericAPIView):
     @staticmethod
     def _update_or_create_spotify_user_tokens(user: SpotifyUser, access_token: str, token_type: str, expires_in: int,
                                               refresh_token: str):
-        expires_in = timezone.now() - datetime.timedelta(seconds=expires_in)
+        expires_in = datetime.datetime.utcfromtimestamp(expires_in / 1000)  # From ms (javascript) to s (python)
         tokens = None
         try:
             tokens = user.tokens
