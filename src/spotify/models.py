@@ -415,3 +415,50 @@ class SpotifyTokensSet(models.Model):
 
     def __str__(self):
         return self.user.display_name or self.user.email
+
+
+# TODO: New FEATURE to collect all the DiscoverWeekly tracks from the playlist: https://www.youtube.com/watch?v=-FsFT6OwE1A
+# class DiscoverWeeklyTracksInfo(models.Model):
+#     pass
+#
+# class DiscoverWeeklyTrack(models.Model):
+#     pass
+
+class PlayedTracksInfo(models.Model):
+    user = models.OneToOneField(
+        SpotifyUser,
+        verbose_name=_('User'),
+        related_name='played_tracks_info',
+        on_delete=models.CASCADE
+    )
+    played_tracks = models.ManyToManyField(Track, verbose_name=_('Played tracks'), through='PlayedTrack')
+    updated_at = models.DateTimeField(verbose_name=_('Updated at'), null=True)
+
+    class Meta:
+        verbose_name = _('Played tracks info')
+        verbose_name_plural = _('Played tracks info')
+
+    def __str__(self):
+        return f"Played Track Info: {self.id}. User {self.user}"
+
+
+class PlayedTrack(models.Model):
+    played_tracks_info = models.ForeignKey(
+        PlayedTracksInfo,
+        verbose_name=_('User'),
+        on_delete=models.CASCADE
+    )
+    track = models.ForeignKey(
+        Track,
+        verbose_name=_('Track'),
+        on_delete=models.PROTECT
+    )
+    played_at = models.DateTimeField(verbose_name=_('Played at'))  # Timezone Aware
+    played_at_ms = models.BigIntegerField(verbose_name=_('Played at ms'))  # Timezone NOT Aware
+
+    class Meta:
+        verbose_name = _('Played track')
+        verbose_name_plural = _('Played tracks')
+
+    def __str__(self):
+        return f"Track: {self.track} played by {self.played_tracks_info.user} at {self.played_at}"

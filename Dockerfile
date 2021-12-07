@@ -3,9 +3,13 @@ FROM python:3.8
 # Set work directory
 WORKDIR /app
 
+ARG RQWORKER
+ENV RQWORKER $RQWORKER
+
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
 
 # Install Yarn & node
 RUN apt-get -qq update && apt-get -qq install curl apt-transport-https && \
@@ -36,6 +40,9 @@ COPY package.json /node/package.json
 RUN cd /node && yarn install && cd /app
 # End Yarn
 
+# Run the command on container startup
+CMD cron && tail -f /var/log/cron.log
+
 # Copy project
 COPY src/ .
 COPY docker/entrypoint.sh /entrypoint.sh
@@ -46,7 +53,9 @@ RUN mkdir -p /app/main/static && cd /app/main/static/ && yarn install && cd /app
 
 # Entrypoint
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT /entrypoint.sh $RQWORKER
+
 EXPOSE 8000
 
 ENV STATIC_ROOT=/data/static

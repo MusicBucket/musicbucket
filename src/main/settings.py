@@ -63,6 +63,7 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
         'app',
 
         # 3rd parties
+        'django_rq',
         'rest_framework',
         'rest_framework.authtoken',
         'django_filters',
@@ -210,6 +211,19 @@ class Base(mixins.CachesMixin, mixins.DatabasesMixin, mixins.CompressMixin,
             'CONN_MAX_AGE': opts.get('BOT_DATABASE_CONN_MAX_AGE', 0),
         }
         return databases
+
+    # RQ
+    RQ_SHOW_ADMIN_LINK = True
+
+    RQ_QUEUES = {
+        "default": {
+            "HOST": opts.get('REDIS_HOST', 'localhost'),
+            "PORT": opts.get('REDIS_PORT', 6379, int),
+            "DB": opts.get('REDIS_DB', 0, int),
+            "PASSWORD": "",
+            "DEFAULT_TIMEOUT": 12000,
+        }
+    }
 
     # LastFM
     LASTFM_API_KEY = opts.get('LASTFM_API_KEY')

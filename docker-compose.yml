@@ -1,37 +1,62 @@
-version: "2"
+version: "3.8"
 
 services:
-    web:
-        build: .
-        restart: "always"
-        ports:
-            - "8000:8000"
-        depends_on:
-            - db
-            - redis
-        volumes:
-            - ./src/:/app
-            - static:/data/static
-        env_file:
-            - .env
-    db:
-        image: postgres:10.1-alpine
-        restart: "always"
-        ports:
-            - "54321:5432"
-        volumes:
-            - pgdata:/var/lib/postgresql/data/
-        env_file:
-            - .env
-        environment:
-            - POSTGRES_USER=${DATABASE_USER}
-            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-            - POSTGRES_DB=${DATABASE_NAME}
-    redis:
-        image: redis:5.0.8
-        restart: "always"
-        expose:
-            - "6379"
+  web:
+    build: .
+    restart: "always"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./src/:/app
+      - static:/data/static
+    env_file:
+      - .env
+  rq_worker:
+    build:
+      context: .
+    restart: "always"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./src/:/app
+      - static:/data/static
+    env_file:
+      - .env
+    environment:
+      - RQWORKER=1
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.update_users_recent_played_tracks.schedule: "@every 10m"
+      ofelia.job-exec.update_users_recent_played_tracks.command: "python manage.py update_users_recent_played_tracks"
+  db:
+    image: postgres:10.1-alpine
+    restart: "always"
+    ports:
+      - "54321:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+  redis:
+    image: redis:5.0.8
+    restart: "always"
+    expose:
+      - "6379"
+  ofelia:
+    image: mcuadros/ofelia:latest
+    depends_on:
+      - rq_worker
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 volumes:
-     pgdata:
-     static:
+  pgdata:
+  static:

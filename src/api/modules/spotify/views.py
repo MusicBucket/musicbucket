@@ -1,6 +1,7 @@
 import datetime
 from typing import Dict
 
+import django_rq
 import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -19,6 +20,7 @@ from profiles.models import Profile
 from spotify.client import SpotifyClient
 from spotify.models import Artist, Track, Album, SpotifyLink, SavedSpotifyLink, FollowedArtist, SpotifyTokensSet, \
     SpotifyUser
+from spotify.services.updater import SpotifyUpdater
 
 
 class ArtistListCreateAPIView(generics.ListCreateAPIView):
@@ -195,6 +197,7 @@ class RegisterView(generics.GenericAPIView):
             self._update_or_create_spotify_user_tokens(
                 user.profile.spotify_user, access_token, token_type, expires_in, refresh_token
             )
+            self._update_spotify_user_data(user)
 
         token, _ = Token.objects.get_or_create(user=user)
 
@@ -269,3 +272,8 @@ class RegisterView(generics.GenericAPIView):
             )
             tokens.save()
         return tokens
+
+    @staticmethod
+    def _update_spotify_user_data(user: SpotifyUser):
+        spotify_updater = SpotifyUpdater()
+        django_rq.enqueue(spotify_updater.update, user)

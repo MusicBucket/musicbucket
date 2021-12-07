@@ -1,6 +1,6 @@
 from django.contrib import admin
 from spotify.models import Genre, Artist, Album, Track, SpotifyLink, FollowedArtist, SavedSpotifyLink, SpotifyUser, \
-    SpotifyTokensSet
+    SpotifyTokensSet, PlayedTracksInfo, PlayedTrack
 
 
 @admin.register(Genre)
@@ -79,3 +79,16 @@ class SpotifyUserAdmin(admin.ModelAdmin):
 @admin.register(SpotifyTokensSet)
 class SpotifyTokensSetAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(PlayedTracksInfo)
+class PlayedTracksInfoAdmin(admin.ModelAdmin):
+    list_display = ('get_user_display_name', 'updated_at')
+
+    def get_user_display_name(self, obj):
+        return obj.user.display_name
+
+
+@admin.register(PlayedTrack)
+class PlayedTrackAdmin(admin.ModelAdmin):
+    list_display = ('played_tracks_info', 'track', 'played_at')
