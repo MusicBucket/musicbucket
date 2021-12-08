@@ -7,19 +7,29 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('spotify', '0002_auto_20200331_1651'),
-        ('telegram', '0002_telegramuser_photo_url'),
+        ("spotify", "0002_auto_20200331_1651"),
+        ("telegram", "0002_telegramuser_photo_url"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='sentspotifylink',
-            name='chat',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sent_links', to='telegram.TelegramChat', verbose_name='Chat'),
+            model_name="sentspotifylink",
+            name="chat",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="sent_links",
+                to="telegram.TelegramChat",
+                verbose_name="Chat",
+            ),
         ),
         migrations.AlterField(
-            model_name='sentspotifylink',
-            name='link',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sent_links', to='spotify.SpotifyLink', verbose_name='Spotify Link'),
+            model_name="sentspotifylink",
+            name="link",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="sent_links",
+                to="spotify.SpotifyLink",
+                verbose_name="Spotify Link",
+            ),
         ),
     ]

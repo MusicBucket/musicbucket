@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('telegram', '0001_initial'),
+        ("telegram", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='telegramuser',
-            name='photo_url',
-            field=models.URLField(blank=True, default='', max_length=250, verbose_name='Photo URL'),
+            model_name="telegramuser",
+            name="photo_url",
+            field=models.URLField(
+                blank=True, default="", max_length=250, verbose_name="Photo URL"
+            ),
         ),
     ]

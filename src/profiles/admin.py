@@ -13,8 +13,11 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(OriginalUserAdmin):
     """Add profile inline to original UserAdmin class"""
-    inlines = [UserProfileInline, ]
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
+
+    inlines = [
+        UserProfileInline,
+    ]
+    list_display = ("username", "email", "first_name", "last_name", "is_staff")
 
 
 user_model = get_user_model()
@@ -24,4 +27,4 @@ finally:
     admin.site.register(user_model, UserAdmin)
 
 # Monkey patching to have the user in the Token admin section
-TokenAdmin.raw_id_fields = ['user']
+TokenAdmin.raw_id_fields = ["user"]

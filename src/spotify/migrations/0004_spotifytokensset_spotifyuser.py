@@ -7,49 +7,135 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('profiles', '0003_auto_20200411_1406'),
-        ('spotify', '0003_auto_20200417_1254'),
+        ("profiles", "0003_auto_20200411_1406"),
+        ("spotify", "0003_auto_20200417_1254"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SpotifyUser',
+            name="SpotifyUser",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('spotify_id', models.CharField(max_length=250, unique=True, verbose_name='Spotify ID')),
-                ('email', models.EmailField(max_length=254, verbose_name='Email')),
-                ('display_name', models.CharField(max_length=250, verbose_name='Display name')),
-                ('country', models.CharField(max_length=100, verbose_name='Country')),
-                ('href', models.URLField(blank=True, max_length=250, verbose_name='Spotify API Href')),
-                ('url', models.URLField(blank=True, max_length=250, verbose_name='Spotify URL')),
-                ('uri', models.CharField(max_length=250, verbose_name='URI')),
-                ('image_url', models.URLField(blank=True, max_length=250, verbose_name='Image')),
-                ('followers', models.IntegerField(blank=True, null=True, verbose_name='Followers')),
-                ('type', models.CharField(blank=True, max_length=100, verbose_name='Type')),
-                ('product', models.CharField(blank=True, max_length=100, verbose_name='Product')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('profile', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='spotify_user', to='profiles.Profile', verbose_name='Profile')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "spotify_id",
+                    models.CharField(
+                        max_length=250, unique=True, verbose_name="Spotify ID"
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254, verbose_name="Email")),
+                (
+                    "display_name",
+                    models.CharField(max_length=250, verbose_name="Display name"),
+                ),
+                ("country", models.CharField(max_length=100, verbose_name="Country")),
+                (
+                    "href",
+                    models.URLField(
+                        blank=True, max_length=250, verbose_name="Spotify API Href"
+                    ),
+                ),
+                (
+                    "url",
+                    models.URLField(
+                        blank=True, max_length=250, verbose_name="Spotify URL"
+                    ),
+                ),
+                ("uri", models.CharField(max_length=250, verbose_name="URI")),
+                (
+                    "image_url",
+                    models.URLField(blank=True, max_length=250, verbose_name="Image"),
+                ),
+                (
+                    "followers",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="Followers"
+                    ),
+                ),
+                (
+                    "type",
+                    models.CharField(blank=True, max_length=100, verbose_name="Type"),
+                ),
+                (
+                    "product",
+                    models.CharField(
+                        blank=True, max_length=100, verbose_name="Product"
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "profile",
+                    models.OneToOneField(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="spotify_user",
+                        to="profiles.Profile",
+                        verbose_name="Profile",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Spotify User',
-                'verbose_name_plural': 'Spotify Users',
+                "verbose_name": "Spotify User",
+                "verbose_name_plural": "Spotify Users",
             },
         ),
         migrations.CreateModel(
-            name='SpotifyTokensSet',
+            name="SpotifyTokensSet",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('refresh_token', models.CharField(max_length=250, verbose_name='Refresh token')),
-                ('access_token', models.CharField(max_length=250, verbose_name='Access token')),
-                ('expires_in', models.DateTimeField(verbose_name='Expires in')),
-                ('token_type', models.CharField(max_length=50, verbose_name='Token type')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('user', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='tokens', to='spotify.SpotifyUser', verbose_name='User')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "refresh_token",
+                    models.CharField(max_length=250, verbose_name="Refresh token"),
+                ),
+                (
+                    "access_token",
+                    models.CharField(max_length=250, verbose_name="Access token"),
+                ),
+                ("expires_in", models.DateTimeField(verbose_name="Expires in")),
+                (
+                    "token_type",
+                    models.CharField(max_length=50, verbose_name="Token type"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tokens",
+                        to="spotify.SpotifyUser",
+                        verbose_name="User",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Spotify Tokens Set',
-                'verbose_name_plural': 'Spotify Tokens Sets',
+                "verbose_name": "Spotify Tokens Set",
+                "verbose_name_plural": "Spotify Tokens Sets",
             },
         ),
     ]

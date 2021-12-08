@@ -10,10 +10,15 @@ def get_user_chats_queryset(request):
 
 
 class UserSentSpotifyLinkFilter(django_filters.FilterSet):
-    chat = django_filters.ModelChoiceFilter(queryset=get_user_chats_queryset, empty_label=_('All'))
-    sent_at_start_date = django_filters.DateFilter(field_name='sent_at', label=_('Sent at start date'),
-                                                   lookup_expr='gte')
-    sent_at_end_date = django_filters.DateFilter(field_name='sent_at', label=_('Sent at end date'), lookup_expr='lte')
+    chat = django_filters.ModelChoiceFilter(
+        queryset=get_user_chats_queryset, empty_label=_("All")
+    )
+    sent_at_start_date = django_filters.DateFilter(
+        field_name="sent_at", label=_("Sent at start date"), lookup_expr="gte"
+    )
+    sent_at_end_date = django_filters.DateFilter(
+        field_name="sent_at", label=_("Sent at end date"), lookup_expr="lte"
+    )
 
     # genres = django_filters.ModelMultipleChoiceFilter(queryset=Genre.objects.all(), label=_('Genres'))
 
@@ -21,4 +26,9 @@ class UserSentSpotifyLinkFilter(django_filters.FilterSet):
 
     class Meta:
         model = SentSpotifyLink
-        fields = ['link__link_type', 'chat', 'sent_at_start_date', 'sent_at_end_date', ]
+        fields = [
+            "link__link_type",
+            "chat",
+            "sent_at_start_date",
+            "sent_at_end_date",
+        ]

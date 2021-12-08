@@ -16,13 +16,21 @@ class TelegramUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TelegramUser
-        fields = ['id', 'profile', 'telegram_id', 'username', 'first_name', 'link', 'sent_links_chat__count']
+        fields = [
+            "id",
+            "profile",
+            "telegram_id",
+            "username",
+            "first_name",
+            "link",
+            "sent_links_chat__count",
+        ]
 
 
 class TelegramChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = TelegramChat
-        fields = '__all__'
+        fields = "__all__"
 
 
 class SentSpotifyLinkSerializer(serializers.ModelSerializer):
@@ -39,7 +47,7 @@ class SentSpotifyLinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SentSpotifyLink
-        fields = '__all__'
+        fields = "__all__"
 
     def validate(self, attrs: {}) -> {}:
         validated_attrs = super().validate(attrs)
@@ -48,9 +56,9 @@ class SentSpotifyLinkSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def _ensure_spotify_link_exists(validated_attrs):
-        link_url = validated_attrs.pop('url')
+        link_url = validated_attrs.pop("url")
         link = SpotifyLink.get_or_create_from_spotify_url(link_url)
-        validated_attrs.update({'link_id': link.id})
+        validated_attrs.update({"link_id": link.id})
         return link
 
     @staticmethod
@@ -69,7 +77,7 @@ class StatsSerializer(serializers.Serializer):
     most_sent_genres = serializers.ListField()
 
     class Meta:
-        fields = ['users_with_chat_link_count', 'most_sent_genres']
+        fields = ["users_with_chat_link_count", "most_sent_genres"]
 
     def create(self, validated_data):
         """UNUSED: This serializer is only used for querying operations"""

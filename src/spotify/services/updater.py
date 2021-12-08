@@ -1,7 +1,7 @@
 import datetime
 import logging
 import dateutil.parser
-from typing import Dict, Tuple, List, Optional
+from typing import Dict, Tuple, List, Optional, Iterable
 
 import django_rq
 from django.db.models import QuerySet
@@ -76,6 +76,26 @@ class SpotifyUpdater:
         last_played_track: Optional[PlayedTrack] = None,
     ):
         cursor: int = int(timezone.now().timestamp() * 1000)
+        until = self._determine_until(cursor, last_played_track)
+
+        while cursor and cursor > until:
+            response = self.spotify_client.get_users_recently_played_tracks(
+                played_tracks_info.user, before_ms=cursor
+            )
+            newer_items = self._get_newer_items(response["items"], until)
+            played_tracks = self._process_newer_items(newer_items, played_tracks_info)
+            PlayedTrack.objects.bulk_create(played_tracks)
+
+            new_cursor = self._cursor_forward(response)
+            logger.info(
+                f"Created {len(played_tracks)} played tracks. "
+                f"Cursor at: {datetime.datetime.utcfromtimestamp((new_cursor or cursor) / 1000)}"
+            )
+            cursor = new_cursor
+
+    def _determine_until(
+        self, cursor: int, last_played_track: Optional[PlayedTrack]
+    ) -> int:
         if last_played_track:
             logger.info(
                 f"    - Updating played tracks from: {datetime.datetime.utcfromtimestamp(cursor / 1000)}"
@@ -86,33 +106,17 @@ class SpotifyUpdater:
                 f"    - Creating played tracks from scratch: {datetime.datetime.utcfromtimestamp(cursor / 1000)}"
             )
             until = self.UNTIL_1_MONTH_AGO_MS
+        return until
 
-        while cursor and cursor > until:
-            response = self.spotify_client.get_users_recently_played_tracks(
-                played_tracks_info.user, before_ms=cursor
+    def _process_newer_items(
+        self, newer_items: Iterable, played_tracks_info: PlayedTracksInfo
+    ) -> List:
+        played_tracks = []
+        for item in newer_items:
+            played_tracks.append(
+                self._process_recently_played_item(item, played_tracks_info)
             )
-            newer_items = filter(
-                lambda item: dateutil.parser.isoparse(item["played_at"]).timestamp()
-                * 1000
-                > until,
-                response["items"],
-            )
-            played_tracks: List[PlayedTrack] = []
-            for item in newer_items:
-                played_tracks.append(
-                    self._process_recently_played_item(item, played_tracks_info)
-                )
-            PlayedTrack.objects.bulk_create(played_tracks)
-            new_cursor = (
-                int(response["cursors"]["before"])
-                if response["cursors"] is not None
-                else None
-            )
-            logger.info(
-                f"Created {len(played_tracks)} played tracks. "
-                f"Cursor at: {datetime.datetime.utcfromtimestamp((new_cursor or cursor) / 1000)}"
-            )
-            cursor = new_cursor
+        return played_tracks
 
     @staticmethod
     def _get_or_create_users_played_track_info(user: SpotifyUser) -> PlayedTracksInfo:
@@ -121,6 +125,22 @@ class SpotifyUpdater:
         if created:
             logger.info(f"    - Created PlayedTrackInfo: {played_tracks_info}")
         return played_tracks_info
+
+    @staticmethod
+    def _get_newer_items(items: Dict, until: int) -> filter:
+        return filter(
+            lambda item: dateutil.parser.isoparse(item["played_at"]).timestamp() * 1000
+            > until,
+            items,
+        )
+
+    @staticmethod
+    def _cursor_forward(response):
+        return (
+            int(response["cursors"]["before"])
+            if response["cursors"] is not None
+            else None
+        )
 
     @staticmethod
     def _process_recently_played_item(item: Dict, played_tracks_info: PlayedTracksInfo):

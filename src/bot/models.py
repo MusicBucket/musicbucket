@@ -23,7 +23,7 @@ class Album(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'album'
+        db_table = "album"
 
     def __str__(self):
         return self.name
@@ -32,29 +32,35 @@ class Album(models.Model):
 class AlbumArtistThrough(models.Model):
     id = models.BigAutoField(primary_key=True)
     album = models.ForeignKey(Album, models.DO_NOTHING, blank=True, null=True)
-    artist = models.ForeignKey('Artist', models.DO_NOTHING, blank=True, null=True)
+    artist = models.ForeignKey("Artist", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'album_artist_through'
-        unique_together = (('album', 'artist'), ('album', 'artist'),)
+        db_table = "album_artist_through"
+        unique_together = (
+            ("album", "artist"),
+            ("album", "artist"),
+        )
 
     def __str__(self):
-        return f'{self.artist.name} - {self.album.name}'
+        return f"{self.artist.name} - {self.album.name}"
 
 
 class AlbumGenreThrough(models.Model):
     id = models.BigAutoField(primary_key=True)
     album = models.ForeignKey(Album, models.DO_NOTHING, blank=True, null=True)
-    genre = models.ForeignKey('Genre', models.DO_NOTHING, blank=True, null=True)
+    genre = models.ForeignKey("Genre", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'album_genre_through'
-        unique_together = (('album', 'genre'), ('album', 'genre'),)
+        db_table = "album_genre_through"
+        unique_together = (
+            ("album", "genre"),
+            ("album", "genre"),
+        )
 
     def __str__(self):
-        return f'{self.album.name} ({self.genre.name})'
+        return f"{self.album.name} ({self.genre.name})"
 
 
 class Artist(models.Model):
@@ -68,21 +74,24 @@ class Artist(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'artist'
+        db_table = "artist"
 
 
 class ArtistGenreThrough(models.Model):
     id = models.BigAutoField(primary_key=True)
     artist = models.ForeignKey(Artist, models.DO_NOTHING, blank=True, null=True)
-    genre = models.ForeignKey('Genre', models.DO_NOTHING, blank=True, null=True)
+    genre = models.ForeignKey("Genre", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'artist_genre_through'
-        unique_together = (('artist', 'genre'), ('artist', 'genre'),)
+        db_table = "artist_genre_through"
+        unique_together = (
+            ("artist", "genre"),
+            ("artist", "genre"),
+        )
 
     def __str__(self):
-        return f'{self.artist.name} ({self.genre.name})'
+        return f"{self.artist.name} ({self.genre.name})"
 
 
 class Chat(models.Model):
@@ -92,7 +101,7 @@ class Chat(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'chat'
+        db_table = "chat"
 
     def __str__(self):
         return self.name
@@ -101,29 +110,29 @@ class Chat(models.Model):
 class Chatlink(models.Model):
     sent_at = models.DateTimeField()
     chat = models.ForeignKey(Chat, models.DO_NOTHING)
-    link = models.ForeignKey('Link', models.DO_NOTHING)
-    sent_by = models.ForeignKey('User', models.DO_NOTHING)
+    link = models.ForeignKey("Link", models.DO_NOTHING)
+    sent_by = models.ForeignKey("User", models.DO_NOTHING)
 
     class Meta:
         managed = False
-        db_table = 'chatlink'
+        db_table = "chatlink"
 
     def __str__(self):
-        return f'{self.chat.name} - {self.link.url}'
+        return f"{self.chat.name} - {self.link.url}"
 
 
 class Followedartist(models.Model):
-    user = models.ForeignKey('User', models.DO_NOTHING)
+    user = models.ForeignKey("User", models.DO_NOTHING)
     artist = models.ForeignKey(Artist, models.DO_NOTHING)
     followed_at = models.DateTimeField()
     last_lookup = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'followedartist'
+        db_table = "followedartist"
 
     def __str__(self):
-        return f'{self.user.username or self.user.first_name} - {self.artist.name}'
+        return f"{self.user.username or self.user.first_name} - {self.artist.name}"
 
 
 class Genre(models.Model):
@@ -131,22 +140,22 @@ class Genre(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'genre'
+        db_table = "genre"
 
     def __str__(self):
         return self.name
 
 
 class Lastfmusername(models.Model):
-    user = models.OneToOneField('User', models.DO_NOTHING, primary_key=True)
+    user = models.OneToOneField("User", models.DO_NOTHING, primary_key=True)
     username = models.TextField(unique=True, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'lastfmusername'
+        db_table = "lastfmusername"
 
     def __str__(self):
-        return f'{self.user.username or self.user.first_name} - {self.username}'
+        return f"{self.user.username or self.user.first_name} - {self.username}"
 
 
 class Link(models.Model):
@@ -170,25 +179,25 @@ class Link(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'link'
+        db_table = "link"
 
     def __str__(self):
         return self.url
 
 
 class Savedlink(models.Model):
-    user = models.ForeignKey('User', models.DO_NOTHING)
+    user = models.ForeignKey("User", models.DO_NOTHING)
     link = models.ForeignKey(Link, models.DO_NOTHING)
     saved_at = models.DateTimeField()
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'savedlink'
-        unique_together = (('user', 'link'),)
+        db_table = "savedlink"
+        unique_together = (("user", "link"),)
 
     def __str__(self):
-        return f'{self.user.username or self.user.first_name} - {self.link.url}'
+        return f"{self.user.username or self.user.first_name} - {self.link.url}"
 
 
 class Track(models.Model):
@@ -206,7 +215,7 @@ class Track(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'track'
+        db_table = "track"
 
     def __str__(self):
         return self.name
@@ -219,11 +228,14 @@ class TrackArtistThrough(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'track_artist_through'
-        unique_together = (('track', 'artist'), ('track', 'artist'),)
+        db_table = "track_artist_through"
+        unique_together = (
+            ("track", "artist"),
+            ("track", "artist"),
+        )
 
     def __str__(self):
-        return f'{self.artist.name} - {self.track.name}'
+        return f"{self.artist.name} - {self.track.name}"
 
 
 class User(models.Model):
@@ -233,7 +245,7 @@ class User(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'user'
+        db_table = "user"
 
     def __str__(self):
-        return f'{self.username or self.first_name} ({self.id})'
+        return f"{self.username or self.first_name} ({self.id})"

@@ -7,23 +7,41 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('spotify', '0002_auto_20200331_1651'),
+        ("spotify", "0002_auto_20200331_1651"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='spotifylink',
-            name='album',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='links', to='spotify.Album', verbose_name='Album'),
+            model_name="spotifylink",
+            name="album",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="links",
+                to="spotify.Album",
+                verbose_name="Album",
+            ),
         ),
         migrations.AlterField(
-            model_name='spotifylink',
-            name='artist',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='links', to='spotify.Artist', verbose_name='Artist'),
+            model_name="spotifylink",
+            name="artist",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="links",
+                to="spotify.Artist",
+                verbose_name="Artist",
+            ),
         ),
         migrations.AlterField(
-            model_name='spotifylink',
-            name='track',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='links', to='spotify.Track', verbose_name='Track'),
+            model_name="spotifylink",
+            name="track",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="links",
+                to="spotify.Track",
+                verbose_name="Track",
+            ),
         ),
     ]

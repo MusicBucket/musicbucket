@@ -2,13 +2,21 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
 from api.modules.telegram.serializers import TelegramUserSerializer
-from spotify.models import SpotifyLink, Artist, Album, Track, SavedSpotifyLink, FollowedArtist, Genre
+from spotify.models import (
+    SpotifyLink,
+    Artist,
+    Album,
+    Track,
+    SavedSpotifyLink,
+    FollowedArtist,
+    Genre,
+)
 
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ArtistSerializer(serializers.ModelSerializer):
@@ -16,7 +24,7 @@ class ArtistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ArtistSimplifiedSerializer(serializers.ModelSerializer):
@@ -24,7 +32,17 @@ class ArtistSimplifiedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ['id', 'spotify_id', 'name', 'href', 'url', 'uri', 'popularity', 'image_url', 'genres']
+        fields = [
+            "id",
+            "spotify_id",
+            "name",
+            "href",
+            "url",
+            "uri",
+            "popularity",
+            "image_url",
+            "genres",
+        ]
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -33,7 +51,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = '__all__'
+        fields = "__all__"
 
 
 class AlbumSimplifiedSerializer(serializers.ModelSerializer):
@@ -41,13 +59,13 @@ class AlbumSimplifiedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = '__all__'
+        fields = "__all__"
 
 
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = '__all__'
+        fields = "__all__"
 
 
 class TrackSimplifiedSerializer(serializers.ModelSerializer):
@@ -55,7 +73,7 @@ class TrackSimplifiedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = '__all__'
+        fields = "__all__"
 
 
 class SpotifyLinkSerializer(serializers.ModelSerializer):
@@ -65,7 +83,7 @@ class SpotifyLinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SpotifyLink
-        fields = '__all__'
+        fields = "__all__"
 
 
 class SavedSpotifyLinkSerializer(serializers.ModelSerializer):
@@ -79,14 +97,14 @@ class SavedSpotifyLinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SavedSpotifyLink
-        fields = '__all__'
+        fields = "__all__"
 
     def create(self, validated_data):
         """Because of unique together with link_id and user_id, we should validate if register already exists in DB"""
         try:
             return SavedSpotifyLink.objects.get(
-                link__id=validated_data.get('link_id'),
-                user__id=validated_data.get('user_id')
+                link__id=validated_data.get("link_id"),
+                user__id=validated_data.get("user_id"),
             )
         except SavedSpotifyLink.DoesNotExist:
             return super().create(validated_data)
@@ -103,11 +121,10 @@ class FollowedArtistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FollowedArtist
-        fields = '__all__'
+        fields = "__all__"
         validators = [
             UniqueTogetherValidator(
-                queryset=FollowedArtist.objects.all(),
-                fields=['artist_id', 'user_id']
+                queryset=FollowedArtist.objects.all(), fields=["artist_id", "user_id"]
             )
         ]
 
@@ -116,7 +133,7 @@ class SearchResultSerializer(serializers.Serializer):
     results = serializers.ListField()
 
     class Meta:
-        fields = ['results']
+        fields = ["results"]
 
     def create(self, validated_data):
         """UNUSED: This serializer is only used for querying operations"""
@@ -135,7 +152,7 @@ class SpotifyRegisterSerializer(serializers.Serializer):
     scope = serializers.CharField(allow_null=False)
 
     class Meta:
-        fields = '__all__'
+        fields = "__all__"
 
     def create(self, validated_data):
         """UNUSED: This serializer is only used for querying operations"""

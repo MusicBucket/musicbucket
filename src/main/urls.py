@@ -18,15 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('web.urls')),
-    path('app/', include('app.urls')),
-    path('profiles/', include('profiles.urls')),
-    path('telegram/', include('telegram.urls')),
-    path('spotify/', include('spotify.urls')),
-    path('api/', include('api.urls')),
-    path('admin/', admin.site.urls),
-    path('hijack/', include('hijack.urls', namespace='hijack')),
-    path('django-rq/', include('django_rq.urls'))
+    path("", include("web.urls")),
+    path("app/", include("app.urls")),
+    path("profiles/", include("profiles.urls")),
+    path("telegram/", include("telegram.urls")),
+    path("spotify/", include("spotify.urls")),
+    path("api/", include("api.urls")),
+    path("admin/", admin.site.urls),
+    path("hijack/", include("hijack.urls", namespace="hijack")),
+    path("django-rq/", include("django_rq.urls")),
 ]
 
 if settings.DEBUG:
@@ -40,5 +40,5 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns += [
-            path('__debug__/', include(debug_toolbar.urls)),
+            path("__debug__/", include(debug_toolbar.urls)),
         ]

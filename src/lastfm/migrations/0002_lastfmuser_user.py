@@ -9,14 +9,19 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('telegram', '0001_initial'),
-        ('lastfm', '0001_initial'),
+        ("telegram", "0001_initial"),
+        ("lastfm", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='lastfmuser',
-            name='user',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='lastfm_user', to='telegram.TelegramUser', verbose_name='User'),
+            model_name="lastfmuser",
+            name="user",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="lastfm_user",
+                to="telegram.TelegramUser",
+                verbose_name="User",
+            ),
         ),
     ]

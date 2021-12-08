@@ -3,12 +3,13 @@ from django.views.generic import RedirectView
 
 from app import views
 
-app_name = 'app'
+app_name = "app"
 
 urlpatterns = [
     path(
-        '', RedirectView.as_view(url=reverse_lazy('app:saved-spotify-link-list')),
-        name='main'
+        "",
+        RedirectView.as_view(url=reverse_lazy("app:saved-spotify-link-list")),
+        name="main",
     ),
     # path(
     #     'sent-spotify-links/',
@@ -21,23 +22,23 @@ urlpatterns = [
     #     name='sent-spotify-link-detail'
     # ),
     path(
-        'saved-spotify-links/',
+        "saved-spotify-links/",
         views.SavedSpotifyLinkListView.as_view(),
-        name='saved-spotify-link-list'
+        name="saved-spotify-link-list",
     ),
     path(
-        r'saved-spotify-links/<int:pk>/',
+        r"saved-spotify-links/<int:pk>/",
         views.SavedSpotifyLinkDetailView.as_view(),
-        name='saved-spotify-link-detail'
+        name="saved-spotify-link-detail",
     ),
     path(
-        'followed-artists/',
+        "followed-artists/",
         views.FollowedArtistListView.as_view(),
-        name='followed-artist-list'
+        name="followed-artist-list",
     ),
     path(
-        r'followed_artists/<int:pk>/',
+        r"followed_artists/<int:pk>/",
         views.FollowedArtistDetailView.as_view(),
-        name='followed-artist-detail'
+        name="followed-artist-detail",
     ),
 ]

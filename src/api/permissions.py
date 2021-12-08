@@ -6,7 +6,8 @@ class APIPermission(permissions.BasePermission):
     Permission class used by allowing to access the API.
     Checks for the group 'api' in the request.user
     """
-    API_PERMISSION_GROUP = 'api'
+
+    API_PERMISSION_GROUP = "api"
 
     def has_permission(self, request, view):
         user = request.user

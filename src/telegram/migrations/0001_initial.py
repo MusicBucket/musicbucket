@@ -11,48 +11,157 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('profiles', '0001_initial'),
-        ('spotify', '0001_initial'),
+        ("profiles", "0001_initial"),
+        ("spotify", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TelegramChat',
+            name="TelegramChat",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('telegram_id', models.CharField(max_length=250, unique=True, verbose_name='Telegram ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, null=True, verbose_name='Created at')),
-                ('name', models.CharField(max_length=250, verbose_name='Name')),
-                ('chat_type', models.CharField(blank=True, choices=[('private', 'Private'), ('channel', 'Channel'), ('group', 'Group'), ('supergroup', 'Supergroup')], default='', max_length=50, verbose_name='Type')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "telegram_id",
+                    models.CharField(
+                        max_length=250, unique=True, verbose_name="Telegram ID"
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, null=True, verbose_name="Created at"
+                    ),
+                ),
+                ("name", models.CharField(max_length=250, verbose_name="Name")),
+                (
+                    "chat_type",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("private", "Private"),
+                            ("channel", "Channel"),
+                            ("group", "Group"),
+                            ("supergroup", "Supergroup"),
+                        ],
+                        default="",
+                        max_length=50,
+                        verbose_name="Type",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='TelegramUser',
+            name="TelegramUser",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('telegram_id', models.CharField(max_length=250, unique=True, verbose_name='Telegram ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, null=True, verbose_name='Created at')),
-                ('username', models.CharField(blank=True, max_length=250, verbose_name='Username')),
-                ('first_name', models.CharField(blank=True, max_length=250, verbose_name='First name')),
-                ('link', models.URLField(blank=True, default='', max_length=250, verbose_name='URL')),
-                ('profile', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='telegram_user', to='profiles.Profile', verbose_name='Profile')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "telegram_id",
+                    models.CharField(
+                        max_length=250, unique=True, verbose_name="Telegram ID"
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, null=True, verbose_name="Created at"
+                    ),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        blank=True, max_length=250, verbose_name="Username"
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(
+                        blank=True, max_length=250, verbose_name="First name"
+                    ),
+                ),
+                (
+                    "link",
+                    models.URLField(
+                        blank=True, default="", max_length=250, verbose_name="URL"
+                    ),
+                ),
+                (
+                    "profile",
+                    models.OneToOneField(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="telegram_user",
+                        to="profiles.Profile",
+                        verbose_name="Profile",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
             bases=(telegram.mixins.EmojiMixin, models.Model),
         ),
         migrations.CreateModel(
-            name='SentSpotifyLink',
+            name="SentSpotifyLink",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sent_at', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Sent at')),
-                ('chat', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='telegram.TelegramChat', verbose_name='Chat')),
-                ('link', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='spotify.SpotifyLink', verbose_name='Spotify Link')),
-                ('sent_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sent_links', to='telegram.TelegramUser', verbose_name='Sent by')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "sent_at",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="Sent at"
+                    ),
+                ),
+                (
+                    "chat",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="telegram.TelegramChat",
+                        verbose_name="Chat",
+                    ),
+                ),
+                (
+                    "link",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="spotify.SpotifyLink",
+                        verbose_name="Spotify Link",
+                    ),
+                ),
+                (
+                    "sent_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="sent_links",
+                        to="telegram.TelegramUser",
+                        verbose_name="Sent by",
+                    ),
+                ),
             ],
         ),
     ]

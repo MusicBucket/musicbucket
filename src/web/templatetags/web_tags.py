@@ -9,7 +9,9 @@ register = template.Library()
 
 @register.simple_tag
 def telegram_login_button() -> str:
-    telegram_login_widget = create_redirect_login_widget(bot_name=settings.TELEGRAM_BOT_NAME,
-                                                         redirect_url=settings.TELEGRAM_LOGIN_REDIRECT_URL,
-                                                         size=MEDIUM)
+    telegram_login_widget = create_redirect_login_widget(
+        bot_name=settings.TELEGRAM_BOT_NAME,
+        redirect_url=settings.TELEGRAM_LOGIN_REDIRECT_URL,
+        size=MEDIUM,
+    )
     return safe(telegram_login_widget)

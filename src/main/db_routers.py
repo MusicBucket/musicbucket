@@ -1,7 +1,7 @@
 class DBRouter:
-    bot_app_label = 'bot'
-    bot_db = 'bot'
-    default_db = 'default'
+    bot_app_label = "bot"
+    bot_db = "bot"
+    default_db = "default"
 
     def db_for_read(self, model, **hints):
         "Point all operations on bot models to 'bot' db"
@@ -17,7 +17,10 @@ class DBRouter:
 
     def allow_relation(self, obj1, obj2, **hints):
         "Allow any relation if a both models in bot app"
-        if obj1._meta.app_label == self.bot_app_label and obj2._meta.app_label == self.bot_app_label:
+        if (
+            obj1._meta.app_label == self.bot_app_label
+            and obj2._meta.app_label == self.bot_app_label
+        ):
             return True
         elif self.bot_app_label not in [obj1._meta.app_label, obj2._meta.app_label]:
             return True

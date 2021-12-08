@@ -8,7 +8,7 @@ class MostSentArtistsSerializer(serializers.Serializer):
     artist = ArtistSerializer(many=False)
 
     class Meta:
-        fields = '__all__'
+        fields = "__all__"
 
     def create(self, validated_data):
         """UNUSED: This serializer is only used for querying operations"""
@@ -31,9 +31,14 @@ class StatsSerializer(serializers.Serializer):
 
     class Meta:
         fields = [
-            'artists_count', 'albums_count', 'tracks_count',
-            'sent_spotify_links_count', 'telegram_users_count', 'telegram_chats_count',
-            'most_sent_artists', 'last_sent_albums'
+            "artists_count",
+            "albums_count",
+            "tracks_count",
+            "sent_spotify_links_count",
+            "telegram_users_count",
+            "telegram_chats_count",
+            "most_sent_artists",
+            "last_sent_albums",
         ]
 
     def create(self, validated_data):

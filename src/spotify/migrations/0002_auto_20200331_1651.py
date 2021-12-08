@@ -9,62 +9,99 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('telegram', '0001_initial'),
-        ('spotify', '0001_initial'),
+        ("telegram", "0001_initial"),
+        ("spotify", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='spotifylink',
-            name='chats',
-            field=models.ManyToManyField(related_name='links', through='telegram.SentSpotifyLink', to='telegram.TelegramChat', verbose_name='Chats'),
+            model_name="spotifylink",
+            name="chats",
+            field=models.ManyToManyField(
+                related_name="links",
+                through="telegram.SentSpotifyLink",
+                to="telegram.TelegramChat",
+                verbose_name="Chats",
+            ),
         ),
         migrations.AddField(
-            model_name='spotifylink',
-            name='track',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, related_name='links', to='spotify.Track', verbose_name='Track'),
+            model_name="spotifylink",
+            name="track",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="links",
+                to="spotify.Track",
+                verbose_name="Track",
+            ),
         ),
         migrations.AddField(
-            model_name='savedspotifylink',
-            name='link',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='saved_links', to='spotify.SpotifyLink', verbose_name='Link'),
+            model_name="savedspotifylink",
+            name="link",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="saved_links",
+                to="spotify.SpotifyLink",
+                verbose_name="Link",
+            ),
         ),
         migrations.AddField(
-            model_name='savedspotifylink',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='saved_links', to='telegram.TelegramUser', verbose_name='User'),
+            model_name="savedspotifylink",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="saved_links",
+                to="telegram.TelegramUser",
+                verbose_name="User",
+            ),
         ),
         migrations.AddField(
-            model_name='followedartist',
-            name='artist',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='followed_by', to='spotify.Artist', verbose_name='Artist'),
+            model_name="followedartist",
+            name="artist",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="followed_by",
+                to="spotify.Artist",
+                verbose_name="Artist",
+            ),
         ),
         migrations.AddField(
-            model_name='followedartist',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='followed_artists', to='telegram.TelegramUser', verbose_name='User'),
+            model_name="followedartist",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="followed_artists",
+                to="telegram.TelegramUser",
+                verbose_name="User",
+            ),
         ),
         migrations.AddField(
-            model_name='artist',
-            name='genres',
-            field=models.ManyToManyField(related_name='artists', to='spotify.Genre', verbose_name='Genres'),
+            model_name="artist",
+            name="genres",
+            field=models.ManyToManyField(
+                related_name="artists", to="spotify.Genre", verbose_name="Genres"
+            ),
         ),
         migrations.AddField(
-            model_name='album',
-            name='artists',
-            field=models.ManyToManyField(related_name='albums', to='spotify.Artist', verbose_name='Artists'),
+            model_name="album",
+            name="artists",
+            field=models.ManyToManyField(
+                related_name="albums", to="spotify.Artist", verbose_name="Artists"
+            ),
         ),
         migrations.AddField(
-            model_name='album',
-            name='genres',
-            field=models.ManyToManyField(related_name='albums', to='spotify.Genre', verbose_name='Genres'),
+            model_name="album",
+            name="genres",
+            field=models.ManyToManyField(
+                related_name="albums", to="spotify.Genre", verbose_name="Genres"
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='savedspotifylink',
-            unique_together={('user', 'link')},
+            name="savedspotifylink",
+            unique_together={("user", "link")},
         ),
         migrations.AlterUniqueTogether(
-            name='followedartist',
-            unique_together={('user', 'artist')},
+            name="followedartist",
+            unique_together={("user", "artist")},
         ),
     ]

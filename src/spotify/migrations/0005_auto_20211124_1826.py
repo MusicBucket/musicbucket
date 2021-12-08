@@ -7,43 +7,85 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('spotify', '0004_spotifytokensset_spotifyuser'),
+        ("spotify", "0004_spotifytokensset_spotifyuser"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PlayedTrack',
+            name="PlayedTrack",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('played_at', models.DateTimeField(verbose_name='Played at')),
-                ('played_at_ms', models.BigIntegerField(verbose_name='Played at ms')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("played_at", models.DateTimeField(verbose_name="Played at")),
+                ("played_at_ms", models.BigIntegerField(verbose_name="Played at ms")),
             ],
             options={
-                'verbose_name': 'Played track',
-                'verbose_name_plural': 'Played tracks',
+                "verbose_name": "Played track",
+                "verbose_name_plural": "Played tracks",
             },
         ),
         migrations.CreateModel(
-            name='PlayedTracksInfo',
+            name="PlayedTracksInfo",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('updated_at', models.DateTimeField(null=True, verbose_name='Updated at')),
-                ('played_tracks', models.ManyToManyField(through='spotify.PlayedTrack', to='spotify.Track', verbose_name='Played tracks')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='played_tracks_info', to='spotify.SpotifyUser', verbose_name='User')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(null=True, verbose_name="Updated at"),
+                ),
+                (
+                    "played_tracks",
+                    models.ManyToManyField(
+                        through="spotify.PlayedTrack",
+                        to="spotify.Track",
+                        verbose_name="Played tracks",
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="played_tracks_info",
+                        to="spotify.SpotifyUser",
+                        verbose_name="User",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Played tracks info',
-                'verbose_name_plural': 'Played tracks info',
+                "verbose_name": "Played tracks info",
+                "verbose_name_plural": "Played tracks info",
             },
         ),
         migrations.AddField(
-            model_name='playedtrack',
-            name='played_tracks_info',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='spotify.PlayedTracksInfo', verbose_name='User'),
+            model_name="playedtrack",
+            name="played_tracks_info",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="spotify.PlayedTracksInfo",
+                verbose_name="User",
+            ),
         ),
         migrations.AddField(
-            model_name='playedtrack',
-            name='track',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='spotify.Track', verbose_name='Track'),
+            model_name="playedtrack",
+            name="track",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                to="spotify.Track",
+                verbose_name="Track",
+            ),
         ),
     ]
