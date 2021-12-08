@@ -475,6 +475,24 @@ class SpotifyUser(models.Model):
         return self.display_name or self.email
 
 
+# TODO Optimization: Perdiocally updatable Table to save calculated user data
+# class SpotifyUserStats(models.Model):
+#     user = models.OneToOneField(
+#         SpotifyUser,
+#         verbose_name=_("User"),
+#         related_name="stats",
+#         on_delete=models.CASCADE,
+#     )
+#     track_daily_played_average = models.PositiveIntegerField(
+#         verbose_name=_("Daily played average tracks"), null=True
+#     )
+#     created_at = models.DateTimeField(verbose_name=_("Created at"), auto_now_add=True)
+#     updated_at = models.DateTimeField(verbose_name=_("Updated at"), auto_now=True)
+#
+#     def __str__(self):
+#         return self.user.display_name or self.user.email
+
+
 class SpotifyTokensSet(models.Model):
     user = models.OneToOneField(
         SpotifyUser,

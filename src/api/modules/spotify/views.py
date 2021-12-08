@@ -229,7 +229,7 @@ class RegisterView(generics.GenericAPIView):
                 expires_in,
                 refresh_token,
             )
-            self._update_spotify_user_data(user)
+            self._update_spotify_user_data(user.profile.spotify_user)
 
         token, _ = Token.objects.get_or_create(user=user)
 
