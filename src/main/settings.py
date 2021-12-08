@@ -34,6 +34,10 @@ class Base(
     SITE_ID = 1
     SECRET_KEY = opts.get("SECRET_KEY", "key")
 
+    # Since Django 3.2 is: DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+    # ref: https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys
+    DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
     # django-cors-headers
     CORS_ALLOW_ALL_ORIGINS = True
 
@@ -62,7 +66,6 @@ class Base(
         # apps
         "main",
         "api",
-        "bot",
         "profiles",
         "telegram",
         "spotify",
@@ -86,8 +89,6 @@ class Base(
         "django_tables2",
         "crispy_forms",
         "hijack",
-        "hijack_admin",
-        "compat",
         "cookielaw",
         "corsheaders",
     ]
@@ -212,22 +213,6 @@ class Base(
             "rest_framework.authentication.TokenAuthentication",
         ),
     }
-
-    # Databases
-    DATABASE_ROUTERS = ["main.db_routers.DBRouter"]
-
-    def get_databases(self, prefix=""):
-        databases = super().get_databases(prefix)
-        databases["bot"] = {
-            "ENGINE": self.get_engine(prefix),
-            "NAME": opts.get("BOT_DATABASE_NAME"),
-            "USER": opts.get("BOT_DATABASE_USER"),
-            "PASSWORD": opts.get("BOT_DATABASE_PASSWORD"),
-            "HOST": opts.get("BOT_DATABASE_HOST"),
-            "PORT": opts.get("BOT_DATABASE_PORT"),
-            "CONN_MAX_AGE": opts.get("BOT_DATABASE_CONN_MAX_AGE", 0),
-        }
-        return databases
 
     # RQ
     RQ_SHOW_ADMIN_LINK = True

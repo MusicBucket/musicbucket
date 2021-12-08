@@ -1,4 +1,4 @@
-{% load static i18n compress hijack_tags cookielaw_tags %}
+{% load static i18n compress cookielaw_tags %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -47,7 +47,6 @@
     {% include "main/components/navbar.html" %}
 </header>
 <main>
-    {% hijack_notification %}
     <div>
         {% block content %}
         {% endblock content %}

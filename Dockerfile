@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.10
 
 # Set work directory
 WORKDIR /app
@@ -25,14 +25,15 @@ RUN \
     apt-get -qq update && \
     xargs apt-get -qq install < /srv/system-requirements.txt
 
-# Pipenv
-COPY Pipfile* /srv/
+# Poetry
+COPY pyproject.toml* /srv/
 RUN \
     pip install --upgrade pip && \
-    pip install pipenv
+    pip install poetry
 WORKDIR /srv
-RUN pipenv install --system --ignore-pipfile
-# End Pipenv
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-dev
+# End Poetry
 
 # Yarn
 WORKDIR /app
