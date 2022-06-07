@@ -1,5 +1,6 @@
 from django.urls import path
 from api.modules.spotify import views
+from api.modules.spotify.app import views as views_app
 
 urlpatterns = [
     path(
@@ -70,7 +71,13 @@ urlpatterns = [
         views.SearchListAPIView.as_view(),
         name="search",
     ),
-    path("get-auth-url/", views.AuthURLView.as_view(), name="auth"),
-    path("auth-callback/", views.AuthCallbackView.as_view(), name="auth-callback"),
-    path("register/", views.RegisterView.as_view(), name="register"),
+    # App
+    path(
+        "recently-played/",
+        views_app.RecentlyPlayed.as_view(),
+        name="recently-played"
+    ),
+    path("get-auth-url/", views_app.AuthURLView.as_view(), name="auth"),
+    path("auth-callback/", views_app.AuthCallbackView.as_view(), name="auth-callback"),
+    path("register/", views_app.RegisterView.as_view(), name="register"),
 ]

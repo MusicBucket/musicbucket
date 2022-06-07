@@ -4,7 +4,8 @@ from rest_framework import permissions
 class APIPermission(permissions.BasePermission):
     """
     Permission class used by allowing to access the API.
-    Checks for the group 'api' in the request.user
+    Checks for the group 'api' in the request.user:
+    TODO: Change to an specific Bot permission for the API
     """
 
     API_PERMISSION_GROUP = "api"

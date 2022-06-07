@@ -34,7 +34,7 @@ class Base(
     SITE_ID = 1
     SECRET_KEY = opts.get("SECRET_KEY", "key")
 
-    # Since Django 3.2 is: DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+    # Since Django 3.2 is: DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
     # ref: https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys
     DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
@@ -75,6 +75,7 @@ class Base(
         # 3rd parties
         "django_rq",
         "rest_framework",
+        "rest_framework_simplejwt",
         "rest_framework.authtoken",
         "django_filters",
         "compressor",
@@ -154,6 +155,7 @@ class Base(
             ),
         ]
 
+
     # Bootstrap 3 alerts integration with Django messages
     MESSAGE_TAGS = {
         messages.ERROR: "danger",
@@ -186,7 +188,7 @@ class Base(
 
     # pgBouncer
     # https://docs.djangoproject.com/en/2.1/ref/databases/#transaction-pooling-server-side-cursors
-    DISABLE_SERVER_SIDE_CURSORS = True
+    # DISABLE_SERVER_SIDE_CURSORS = True
 
     # Google Recaptcha (django-recaptcha)
     RECAPTCHA_PUBLIC_KEY = opts.get("RECAPTCHA_PUBLIC_KEY", "")
@@ -206,12 +208,13 @@ class Base(
         "DEFAULT_FILTER_BACKENDS": (
             "django_filters.rest_framework.DjangoFilterBackend",
         ),
-        "DEFAULT_PERMISSION_CLASSES": [
-            "api.permissions.APIPermission",
-        ],
+        "DEFAULT_PERMISSION_CLASSES": [],
         "DEFAULT_AUTHENTICATION_CLASSES": (
+            "rest_framework_simplejwt.authentication.JWTAuthentication",
             "rest_framework.authentication.TokenAuthentication",
         ),
+        #"DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+        #"PAGE_SIZE": 100
     }
 
     # RQ

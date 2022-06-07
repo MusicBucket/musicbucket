@@ -9,7 +9,7 @@ from spotify.models import (
     Track,
     SavedSpotifyLink,
     FollowedArtist,
-    Genre,
+    Genre, PlayedTrack,
 )
 
 
@@ -55,6 +55,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
 
 class AlbumSimplifiedSerializer(serializers.ModelSerializer):
+    genres = GenreSerializer(many=True)  # TODO: Warning, this could break some bot features
     artists = ArtistSimplifiedSerializer(many=True)
 
     class Meta:
@@ -70,6 +71,7 @@ class TrackSerializer(serializers.ModelSerializer):
 
 class TrackSimplifiedSerializer(serializers.ModelSerializer):
     artists = ArtistSimplifiedSerializer(many=True)
+    album = AlbumSimplifiedSerializer()
 
     class Meta:
         model = Track
@@ -127,6 +129,14 @@ class FollowedArtistSerializer(serializers.ModelSerializer):
                 queryset=FollowedArtist.objects.all(), fields=["artist_id", "user_id"]
             )
         ]
+
+
+class PlayedTrackSerializer(serializers.ModelSerializer):
+    track = TrackSimplifiedSerializer(read_only=True)
+
+    class Meta:
+        model = PlayedTrack
+        fields = ('track', 'played_at', 'played_at_ms',)
 
 
 class SearchResultSerializer(serializers.Serializer):
