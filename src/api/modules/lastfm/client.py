@@ -5,6 +5,15 @@ from lastfmcollagegenerator.collage_generator import CollageGenerator
 
 
 class LastfmClient:
+    PERIODS = (
+        pylast.PERIOD_7DAYS,
+        pylast.PERIOD_1MONTH,
+        pylast.PERIOD_3MONTHS,
+        pylast.PERIOD_6MONTHS,
+        pylast.PERIOD_12MONTHS,
+        pylast.PERIOD_OVERALL
+    )
+
     def __init__(self):
         self.network = pylast.LastFMNetwork(
             api_key=settings.LASTFM_API_KEY, api_secret=settings.LASTFM_API_SECRET
@@ -42,7 +51,7 @@ class LastfmClient:
 
     @staticmethod
     def generate_collage(
-        username: str, cols: int, rows: int, period: str = pylast.PERIOD_7DAYS
+            username: str, cols: int, rows: int, period: str = pylast.PERIOD_7DAYS
     ) -> Image:
         collage_generator = CollageGenerator(
             lastfm_api_key=settings.LASTFM_API_KEY,

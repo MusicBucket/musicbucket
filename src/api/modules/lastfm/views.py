@@ -95,14 +95,23 @@ class TopAlbumsView(generics.RetrieveAPIView):
     serializer_class = TopAlbumsSerializer
     http_method_names = ["get"]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.last_fm_client = LastfmClient()
+
     def get_object(self):
         telegram_user = get_object_or_404(
             TelegramUser, telegram_id=self.kwargs.get("user__telegram_id")
         )
+
+        period = self.request.query_params.get("period")
+        if period not in self.last_fm_client.PERIODS:
+            period = pylast.PERIOD_7DAYS
+
         top_albums = []
         try:
             lastfm_user = telegram_user.lastfm_user
-            top_albums = LastfmClient().get_top_albums(lastfm_user.username)
+            top_albums = LastfmClient().get_top_albums(lastfm_user.username, period)
         except LastfmUser.DoesNotExist:
             lastfm_user = None
         top_albums_data = {
@@ -123,14 +132,23 @@ class TopArtistsView(generics.RetrieveAPIView):
     serializer_class = TopArtistsSerializer
     http_method_names = ["get"]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.last_fm_client = LastfmClient()
+
     def get_object(self):
         telegram_user = get_object_or_404(
             TelegramUser, telegram_id=self.kwargs.get("user__telegram_id")
         )
+
+        period = self.request.query_params.get("period")
+        if period not in self.last_fm_client.PERIODS:
+            period = pylast.PERIOD_7DAYS
+
         top_artists = []
         try:
             lastfm_user = telegram_user.lastfm_user
-            top_artists = LastfmClient().get_top_artists(lastfm_user.username)
+            top_artists = self.last_fm_client.get_top_artists(lastfm_user.username, period)
         except LastfmUser.DoesNotExist:
             lastfm_user = None
         top_artists_data = {
@@ -147,14 +165,23 @@ class TopTracksView(generics.RetrieveAPIView):
     serializer_class = TopTracksSerializer
     http_method_names = ["get"]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.last_fm_client = LastfmClient()
+
     def get_object(self):
         telegram_user = get_object_or_404(
             TelegramUser, telegram_id=self.kwargs.get("user__telegram_id")
         )
+
+        period = self.request.query_params.get("period")
+        if period not in self.last_fm_client.PERIODS:
+            period = pylast.PERIOD_7DAYS
+
         top_tracks = []
         try:
             lastfm_user = telegram_user.lastfm_user
-            top_tracks = LastfmClient().get_top_tracks(lastfm_user.username)
+            top_tracks = LastfmClient().get_top_tracks(lastfm_user.username, period)
         except LastfmUser.DoesNotExist:
             lastfm_user = None
         top_tracks_data = {
