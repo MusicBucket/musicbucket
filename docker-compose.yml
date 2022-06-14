@@ -52,6 +52,7 @@ services:
       - "6379"
   ofelia:
     image: mcuadros/ofelia:latest
+    restart: "always"
     depends_on:
       - rq_worker
     command: daemon --docker
