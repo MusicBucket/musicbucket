@@ -799,7 +799,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "lastfmcollagegenerator"
-version = "0.2.1"
+version = "0.2.3"
 description = "Create Last.fm collages"
 category = "main"
 optional = false
@@ -1602,7 +1602,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "0718633b47c75ab33fa818de4c811346ad777ac160c5fe9815a0ff1ac6f6e6fa"
+content-hash = "8b57a03faa0c66d4951d0d32d88a9db8450b0ebef477016cf97d0862264e0f18"
 
 [metadata.files]
 anyio = [
@@ -1916,8 +1916,8 @@ jmespath = [
     {file = "jmespath-1.0.0.tar.gz", hash = "sha256:a490e280edd1f57d6de88636992d05b71e97d69a26a19f058ecf7d304474bf5e"},
 ]
 lastfmcollagegenerator = [
-    {file = "lastfmcollagegenerator-0.2.1-py3-none-any.whl", hash = "sha256:d3dbbeebcc71069aac827529a19d0e55f564f736f1dbdb1156557b7f75f04672"},
-    {file = "lastfmcollagegenerator-0.2.1.tar.gz", hash = "sha256:d6ff80ed1dc51b27affa7ac5dca2134d0dd2903bec26d9c91a134e75e51cbb7a"},
+    {file = "lastfmcollagegenerator-0.2.3-py3-none-any.whl", hash = "sha256:42464124cf17ba6ba40aedb8c4794f3efd4c90ab5865ee5a054811cb81e8a858"},
+    {file = "lastfmcollagegenerator-0.2.3.tar.gz", hash = "sha256:0ef9eddb9ee1684f61d0e42f528e899ff6687205c3b2e4a4e1e109d0792eafbe"},
 ]
 markdown = [
     {file = "Markdown-3.3.7-py3-none-any.whl", hash = "sha256:f5da449a6e1c989a4cea2631aa8ee67caa5a2ef855d551c88f9e309f4634c621"},

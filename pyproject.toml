@@ -34,7 +34,7 @@ gunicorn = "==20.1.0"
 django-hijack = "==3.2.1"
 django-cookie-law = "==2.2.0"
 whitenoise = "==6.2.0"
-lastfmcollagegenerator = "==0.2.2"
+lastfmcollagegenerator = "==0.2.3"
 django-cors-headers = "==3.13.*"
 django-rq = "==2.5.1"
 
