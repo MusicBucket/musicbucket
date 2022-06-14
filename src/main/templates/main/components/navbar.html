@@ -3,8 +3,6 @@
 
 <!-- Profile Dropdown -->
 <ul id="profile-dropdown" class="dropdown-content">
-{#    <li><a href="{% url "profiles:logout" %}">{% trans "Edit profile" %}</a></li>#}
-{#    <li class="divider"></li>#}
     <li><a href="{% url "profiles:logout" %}">{% trans "Logout" %}</a></li>
 </ul>
 <nav>
@@ -19,20 +17,6 @@
                         MusicBucket
                     {% endblock navbar_title %}
                 </a>
-                <ul id="nav-mobile" class="right">
-                    {% if user.is_authenticated %}
-                        {% if request.resolver_match.app_name != 'app' %}
-                            <li><a href="{% url "app:main" %}">{% trans "Go to the app" %}</a></li>
-                        {% endif %}
-                        <li>
-                            <a class="dropdown-trigger" href="#" data-target="profile-dropdown">{{ user.username }}
-                                <i class="material-icons right">arrow_drop_down</i>
-                            </a>
-                        </li>
-                    {% else %}
-                        <li>{% telegram_login_button %}</li>
-                    {% endif %}
-                </ul>
             </div>
         </div>
     </div>
