@@ -85,7 +85,6 @@ class Base(
         "robots",
         "storages",
         "widget_tweaks",
-        "django_telegram_login",
         "django_tables2",
         "crispy_forms",
         "hijack",
