@@ -553,14 +553,6 @@ Django = ">=1.11"
 tablib = ["tablib"]
 
 [[package]]
-name = "django-telegram-login"
-version = "0.2.3"
-description = "The reusable Django application for Telegram authorization (also known as Telegram login)."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "django-widget-tweaks"
 version = "1.4.12"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
@@ -807,7 +799,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "lastfmcollagegenerator"
-version = "0.1.4"
+version = "0.1.5"
 description = "Create Last.fm collages"
 category = "main"
 optional = false
@@ -1610,7 +1602,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "4e1db9fb814d7dccf45d7651f8d2eb5899053ee67ad6b6dc4c08118409977b9d"
+content-hash = "09f0c14a5aa44dc39d4365ed986a6dd02bdaf35c85a7755f1fd28bf6ab5dc200"
 
 [metadata.files]
 anyio = [
@@ -1849,10 +1841,6 @@ django-tables2 = [
     {file = "django-tables2-2.4.1.tar.gz", hash = "sha256:6c72dd208358539e789e4c0efd7d151e43283a4aa4093a35f44c43489e7ddeaa"},
     {file = "django_tables2-2.4.1-py2.py3-none-any.whl", hash = "sha256:50762bf3d7c61a4eb70e763c3e278650d7266bb78d0497fc8fafcf4e507c9a64"},
 ]
-django-telegram-login = [
-    {file = "django-telegram-login-0.2.3.tar.gz", hash = "sha256:690196527b78127f059842fe7aa689ee134f594d184ebdf478554011a7471088"},
-    {file = "django_telegram_login-0.2.3-py3-none-any.whl", hash = "sha256:e0c0aeafab55f33bca1b5a5f33b06fc257d286c7a3911ec8517df83a716d3371"},
-]
 django-widget-tweaks = [
     {file = "django-widget-tweaks-1.4.12.tar.gz", hash = "sha256:9bfc5c705684754a83cc81da328b39ad1b80f32bd0f4340e2a810cbab4b0c00e"},
     {file = "django_widget_tweaks-1.4.12-py3-none-any.whl", hash = "sha256:fe6b17d5d595c63331f300917980db2afcf71f240ab9341b954aea8f45d25b9a"},
@@ -1928,8 +1916,8 @@ jmespath = [
     {file = "jmespath-1.0.0.tar.gz", hash = "sha256:a490e280edd1f57d6de88636992d05b71e97d69a26a19f058ecf7d304474bf5e"},
 ]
 lastfmcollagegenerator = [
-    {file = "lastfmcollagegenerator-0.1.4-py3-none-any.whl", hash = "sha256:0e3f2e726dd4479b9a693031a7646a5b4c3d5f4e28e91d722f1319c88c6ddfa5"},
-    {file = "lastfmcollagegenerator-0.1.4.tar.gz", hash = "sha256:08cda89e0d607f5ab89e951a08f447aca74f1cb013e2a5811ceadd72e78664f2"},
+    {file = "lastfmcollagegenerator-0.1.5-py3-none-any.whl", hash = "sha256:b7a7188b52a8fa6b09155b0bbfbbd67cd7ebaaaef9756b791437df5fec724c2d"},
+    {file = "lastfmcollagegenerator-0.1.5.tar.gz", hash = "sha256:6b471eca90623af4e7eb3fe7cb771c22c1f92708e4e2422ef548cf0a6e12afd5"},
 ]
 markdown = [
     {file = "Markdown-3.3.7-py3-none-any.whl", hash = "sha256:f5da449a6e1c989a4cea2631aa8ee67caa5a2ef855d551c88f9e309f4634c621"},

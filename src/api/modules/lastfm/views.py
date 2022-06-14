@@ -87,7 +87,7 @@ class CollageAPIView(generics.GenericAPIView):
             cols=int(query_params.get("cols", 5)),
         )
         response = HttpResponse(content_type="image/png")
-        image.save(response, "png")
+        image.save(response, format="png")
         return response
 
 
