@@ -6,7 +6,7 @@ authors = ["Pau Riera <pau.riera.forteza@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "==4.0"
+Django = "==4.0.*"
 djangorestframework = "==3.13.1"
 django-compressor = {git = "https://github.com/django-compressor/django-compressor.git", rev = "develop"}  # TODO: Change to 3.0 after 2022/01/01
 django-constance = {version = "==2.9.0", extras = ["database"]}
