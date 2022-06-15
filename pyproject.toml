@@ -34,9 +34,9 @@ gunicorn = "==20.1.0"
 django-hijack = "==3.2.1"
 django-cookie-law = "==2.2.0"
 whitenoise = "==6.2.0"
-lastfmcollagegenerator = "==0.2.5"
 django-cors-headers = "==3.13.*"
 django-rq = "==2.5.1"
+lastfmcollagegenerator = "^0.2.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
