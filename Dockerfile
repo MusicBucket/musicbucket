@@ -20,19 +20,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
 
 COPY docker/locale.gen /etc/locale.gen
 COPY system-requirements.txt /srv/system-requirements.txt
+
 # Install system dependencies
 RUN \
     apt-get -qq update && \
     xargs apt-get -qq install < /srv/system-requirements.txt
-
-# FreeType
-RUN \
-    git clone https://github.com/LuaDist/freetype && \
-    cd freetype && \
-    ./autogen.sh && \
-    ./configure && \
-    make && \
-    make install
 
 # Poetry
 COPY pyproject.toml* /srv/
