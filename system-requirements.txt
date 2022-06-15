@@ -5,5 +5,3 @@ locales
 nodejs
 yarn
 vim
-libfreetype6-dev
-freetype2-demos
