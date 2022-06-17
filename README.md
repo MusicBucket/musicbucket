@@ -1,6 +1,6 @@
 # MusicBucket Web
 
-![github-small](https://github.com/paurieraf/musicbucket/blob/master/images/logos/musicbucket_bot_letter_logo_1229x2574.png?raw=True)
+![musicbucket](https://github.com/musicbucket/musicbucket/blob/main/images/logos/musicbucket_bot_letter_logo.png?raw=True)
 
 **MusicBucket** is a platform with an API consumed by MusicBucket Bot (https://github.com/paurieraf/musicbucket-bot/)
 
@@ -13,7 +13,6 @@ Check it out at https://musicbucket.net
 
 ## Special thanks
 
-- To Pablo I. for the logo.
 - To Sergio C. for the deployment operations.
 - To the **Sonomada** community and its group in Telegram (https://t.me/Sonomada_gang) where we use and test the bot actively and propose new features.
 
