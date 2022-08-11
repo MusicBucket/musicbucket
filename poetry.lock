@@ -264,7 +264,7 @@ dev = ["tox", "bump2version (<1)", "sphinx (<2)", "importlib-metadata (<3)", "im
 
 [[package]]
 name = "django"
-version = "4.0.5"
+version = "4.0.7"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
@@ -276,8 +276,8 @@ sqlparse = ">=0.2.2"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
 [package.extras]
-argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+argon2 = ["argon2-cffi (>=19.1.0)"]
 
 [[package]]
 name = "django-appconf"
@@ -315,7 +315,7 @@ django = ">=2.2"
 
 [[package]]
 name = "django-compressor"
-version = "4.0"
+version = "4.1"
 description = "Compresses linked and inline JavaScript or CSS into single cached files."
 category = "main"
 optional = false
@@ -331,7 +331,7 @@ rjsmin = "1.2.0"
 type = "git"
 url = "https://github.com/django-compressor/django-compressor.git"
 reference = "develop"
-resolved_reference = "d70f1d6cc8696386afa8590ba8e6f269658f112d"
+resolved_reference = "d0b3d998c32eaa960f84a6ea41676ca338542777"
 
 [[package]]
 name = "django-configurations"
@@ -932,8 +932,8 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-dev = ["pre-commit", "tox"]
-testing = ["pytest", "pytest-benchmark"]
+testing = ["pytest-benchmark", "pytest"]
+dev = ["tox", "pre-commit"]
 
 [[package]]
 name = "prompt-toolkit"
@@ -1408,12 +1408,12 @@ optional = false
 python-versions = "*"
 
 [package.extras]
-django = ["Django (>=2.0.6)", "lxml (>=4.2.4)", "cssselect"]
-edge = ["msedge-selenium-tools"]
-flask = ["Flask (>=2.0.2)", "lxml (>=4.2.4)", "cssselect"]
-selenium3 = ["selenium (>=3.141.0,<4.0)"]
+"zope.testbrowser" = ["cssselect", "lxml (>=4.2.4)", "zope.testbrowser (>=5.5.1)"]
 selenium4 = ["selenium (>=4.1.0,<5.0)"]
-"zope.testbrowser" = ["zope.testbrowser (>=5.5.1)", "lxml (>=4.2.4)", "cssselect"]
+selenium3 = ["selenium (>=3.141.0,<4.0)"]
+flask = ["cssselect", "lxml (>=4.2.4)", "Flask (>=2.0.2)"]
+edge = ["msedge-selenium-tools"]
+django = ["cssselect", "lxml (>=4.2.4)", "Django (>=2.0.6)"]
 
 [[package]]
 name = "spotipy"
@@ -1454,7 +1454,7 @@ executing = "*"
 pure-eval = "*"
 
 [package.extras]
-tests = ["pytest", "typeguard", "pygments", "littleutils", "cython"]
+tests = ["cython", "littleutils", "pygments", "typeguard", "pytest"]
 
 [[package]]
 name = "termcolor"
@@ -1764,8 +1764,8 @@ deprecated = [
     {file = "Deprecated-1.2.13.tar.gz", hash = "sha256:43ac5335da90c31c24ba028af536a91d41d53f9e6901ddb021bcc572ce44e38d"},
 ]
 django = [
-    {file = "Django-4.0.5-py3-none-any.whl", hash = "sha256:502ae42b6ab1b612c933fb50d5ff850facf858a4c212f76946ecd8ea5b3bf2d9"},
-    {file = "Django-4.0.5.tar.gz", hash = "sha256:f7431a5de7277966f3785557c3928433347d998c1e6459324501378a291e5aab"},
+    {file = "Django-4.0.7-py3-none-any.whl", hash = "sha256:41bd65a9e5f8a89cdbfa7a7bba45cd7431ae89e750af82dea8a35fd1a7ecbe66"},
+    {file = "Django-4.0.7.tar.gz", hash = "sha256:9c6d5ad36be798e562ddcaa6b17b1c3ff2d3c4f529a47432b69fb9a30f847461"},
 ]
 django-appconf = [
     {file = "django-appconf-1.0.5.tar.gz", hash = "sha256:be3db0be6c81fa84742000b89a81c016d70ae66a7ccb620cdef592b1f1a6aaa4"},
