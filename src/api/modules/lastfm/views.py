@@ -75,6 +75,7 @@ class CollageAPIView(generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         # TODO: Parameter validation
+        # TODO: Accept entity as parameter
         telegram_user = get_object_or_404(
             TelegramUser, telegram_id=self.kwargs.get("user__telegram_id")
         )

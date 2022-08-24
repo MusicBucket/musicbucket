@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+// Corporate colors
+$red: #b02631;
+
+
+// Colors
+$primary: $red;
+$body-background-color: #f2f2f2;
+$footer-background-color: #e0e0e0;
+
+
+// Import Bulma SASS file
+@import "../node_modules/bulma/bulma.sass";

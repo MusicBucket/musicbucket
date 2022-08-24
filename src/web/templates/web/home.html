@@ -27,5 +27,12 @@
                    href="https://t.me/music_bucket_bot"><span class="mdi mdi-telegram">&nbsp;</span>MusicBucket Bot</a>
             </p>
         </div>
+        <div class="row">
+            <strong>{% trans "Try the Last.fm collage generator" %}</strong>
+            <p>
+                <a id="lastfmcollagegenerator-btn" class="btn btn-large waves-effect waves-light"
+                   href="{% url 'collagegenerator:collage-generator' %}"><span class="mdi mdi-lastfm">&nbsp;</span>Last.fm Collage Generator</a>
+            </p>
+        </div>
     </div>
 {% endblock web %}

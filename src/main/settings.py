@@ -72,6 +72,7 @@ class Base(
         "lastfm",
         "web",
         "app",
+        "collagegenerator",
         # 3rd parties
         "django_rq",
         "rest_framework",

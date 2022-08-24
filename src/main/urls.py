@@ -19,6 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path("", include("web.urls")),
+    path("collage/", include("collagegenerator.urls")),
     path("app/", include("app.urls")),
     path("profiles/", include("profiles.urls")),
     path("telegram/", include("telegram.urls")),

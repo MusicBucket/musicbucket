@@ -1,0 +1,53 @@
+{% load static i18n compress cookielaw_tags %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="{% trans "Generate awesome collages from your Last.fm most listened albums, artists or tracks. Create Last.fm collages of your tops." %}">
+    <meta name="author" content="pauriera.com">
+    <title>Last.fm collage generator</title>
+    <link rel="icon" type="image/x-icon"
+          href="{% static 'collagegenerator/img/favicon.ico' %}">
+    {% block css %}
+        {% compress css %}
+            <link rel="stylesheet"
+                  href="{% static 'cookielaw/css/cookielaw.css' %}"/>
+            <link rel="stylesheet" type="text/scss"
+                  href="{% static 'collagegenerator/scss/base.scss' %}">
+        {% endcompress %}
+    {% endblock %}
+
+    {% compress css %}
+        {% block page_css %}
+            {# page specific css goes here #}
+        {% endblock page_css %}
+    {% endcompress %}
+
+    {# Google Analytics #}
+    <script>
+        window.ga = window.ga || function () {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src='//www.google-analytics.com/analytics.js'></script>
+</head>
+<body>
+{% include 'collagegenerator/components/header.html' %}
+{% block content %}
+{% endblock %}
+{% CookielawBanner %}
+{% include 'collagegenerator/components/footer.html' %}
+
+{% block javascript %}
+    {% compress js %}
+        <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+    {% endcompress %}
+{% endblock %}
+</body>
+</html>
+

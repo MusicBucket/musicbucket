@@ -1,6 +1,7 @@
 import pylast
-from PIL.Image import Image
+from PIL import Image
 from django.conf import settings
+
 from lastfmcollagegenerator.collage_generator import CollageGenerator
 
 
@@ -16,7 +17,8 @@ class LastfmClient:
 
     def __init__(self):
         self.network = pylast.LastFMNetwork(
-            api_key=settings.LASTFM_API_KEY, api_secret=settings.LASTFM_API_SECRET
+            api_key=settings.LASTFM_API_KEY,
+            api_secret=settings.LASTFM_API_SECRET
         )
 
     def now_playing(self, username: str) -> {}:
@@ -34,8 +36,17 @@ class LastfmClient:
         except IndexError:
             cover = None
 
-        data = {"artist": track.artist, "album": album, "track": track, "cover": cover}
+        data = {
+            "artist": track.artist,
+            "album": album,
+            "track": track,
+            "cover": cover
+        }
         return data
+
+    def check_if_user_exists(self, username: str) -> bool:
+        self.network.get_user(username).get_name(properly_capitalized=True)
+        return True
 
     def get_top_albums(self, username: str, period=pylast.PERIOD_7DAYS):
         top_albums = self.network.get_user(username).get_top_albums(period)
@@ -51,13 +62,22 @@ class LastfmClient:
 
     @staticmethod
     def generate_collage(
-            username: str, cols: int, rows: int, period: str = pylast.PERIOD_7DAYS
+            username: str,
+            cols: int,
+            rows: int,
+            entity: str = CollageGenerator.ENTITY_ALBUM,
+            period: str = pylast.PERIOD_7DAYS
     ) -> Image:
+        # TODO: This is a workaround method. CollageGenerator should
+        #  instantiate KEY/SECRET by .env var by itself and keep those
+        #  parameters optional. This way method wouldn't be necessary in
+        #  collagegenerator/views.py.
+        #  Otherwise move this method elsewhere
         collage_generator = CollageGenerator(
             lastfm_api_key=settings.LASTFM_API_KEY,
             lastfm_api_secret=settings.LASTFM_API_SECRET,
         )
-        image = collage_generator.generate_top_albums_collage(
-            username, cols, rows, period
+        image = collage_generator.generate(
+            entity, username, cols, rows, period
         )
         return image

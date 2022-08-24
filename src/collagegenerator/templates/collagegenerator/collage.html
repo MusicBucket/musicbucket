@@ -1,0 +1,122 @@
+{% extends "collagegenerator/base.html" %}
+{% load static i18n compress widget_tweaks %}
+
+{% block content %}
+    <section class="section">
+        <div class="container has-text-centered">
+            <img src="{% static 'collagegenerator/img/logo.png' %}"
+                 alt="Collage Generator" width="300" height="300">
+            <h1 class="title">Collage generator for Last.fm</h1>
+            <p class="subtitle">
+                by <a class="link-secondary text-decoration-none"
+                      href="https://musicbucket.net"><strong>MusicBucket</strong></a>
+            </p>
+            <p>Generate awesome collages from your Last.fm most listened
+                albums, artists or tracks.</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                {% for field, errors in form.non_field_errors.items %}
+                    <p class="help is-danger">{{ errors.0 }}</p>
+                {% endfor %}
+                {% for field, errors in form.errors.items %}
+                    <p class="help is-danger">{{ errors.0 }}</p>
+                {% endfor %}
+                <div class="level">
+                    <div class="level-item is-flex-grow-5">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label for="{{ form.username.id_for_label }}"
+                                       class="label">Username</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="control">
+                                    {% render_field form.username class+="input is-normal" %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="level-item is-flex-grow-5">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label for="{{ form.entity.id_for_label }}"
+                                       class="label">Entity</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <div class="select">
+                                            {% render_field form.entity %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="level-item is-flex-grow-0">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label for="{{ form.rows.id_for_label }}"
+                                       class="label">
+                                    Rows
+                                </label>
+                            </div>
+                            <div class="field-body">
+                                <div class="control">
+                                    {% render_field form.rows class+="input is-normal" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="level-item is-flex-grow-0">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label for="{{ form.cols.id_for_label }}"
+                                       class="label">
+                                    Cols
+                                </label>
+                            </div>
+                            <div class="field-body">
+                                <div class="control">
+                                    {% render_field form.cols class+="input is-normal" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="level-item is-flex-grow-5">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label for="{{ form.period.id_for_label }}"
+                                       class="label">Period</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <div class="select">
+                                            {% render_field form.period %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <div class="field">
+                            <div class="control">
+                                <button type="submit"
+                                        class="button is-primary">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {# TODO: Add show_play_count parameter #}
+                    {# TODO: Add more customization options #}
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

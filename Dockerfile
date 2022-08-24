@@ -52,6 +52,7 @@ COPY docker/app.docker.ini /srv/app.ini
 RUN cp /srv/app.ini /app/app.ini
 
 RUN mkdir -p /app/main/static && cd /app/main/static/ && yarn install && cd /app
+RUN mkdir -p /app/collagegenerator/static && cd /app/collagegenerator/static/ && yarn install && cd /app
 
 # Entrypoint
 RUN chmod +x /entrypoint.sh
