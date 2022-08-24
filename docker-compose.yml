@@ -33,12 +33,12 @@ services:
       ofelia.job-exec.update_users_recent_played_tracks.schedule: "@every 10m"
       ofelia.job-exec.update_users_recent_played_tracks.command: "python manage.py update_users_recent_played_tracks"
   db:
-    image: postgres:12.12-alpine
+    image: postgres:14.5-alpine
     restart: "always"
     ports:
       - "54321:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data/
+      - pgdata14:/var/lib/postgresql/data/
     env_file:
       - .env
     environment:
@@ -60,4 +60,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 volumes:
   pgdata:
+  pgdata14:
   static:
