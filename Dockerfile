@@ -52,6 +52,7 @@ COPY docker/app.docker.ini /srv/app.ini
 RUN cp /srv/app.ini /app/app.ini
 
 # Install Django application specific npm packages
+RUN mkdir -p /app/main/static && cd /app/main/static/ && yarn install && cd /app
 RUN cd /app/collagegenerator/static/collagegenerator && yarn install && cd /app
 
 # Entrypoint
