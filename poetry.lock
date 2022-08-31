@@ -135,7 +135,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.27.58"
+version = "1.27.63"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -585,7 +585,7 @@ testing = ["pre-commit"]
 
 [[package]]
 name = "executing"
-version = "0.10.0"
+version = "1.0.0"
 description = "Get the currently executing AST node of a frame, and other information"
 category = "dev"
 optional = false
@@ -798,7 +798,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "lastfmcollagegenerator"
-version = "0.4.0"
+version = "0.4.1"
 description = "Create Last.fm collages"
 category = "main"
 optional = false
@@ -1442,7 +1442,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "stack-data"
-version = "0.4.0"
+version = "0.5.0"
 description = "Extract data from python stack frames and tracebacks for informative displays"
 category = "dev"
 optional = false
@@ -1606,7 +1606,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "8bdbde9f0eceee0780657d2f03e15a61d1bae61382340a5117c6e8a059f020a5"
+content-hash = "9f750c00acfe378b44ce3f7752a640215ea9b7c484a4391fe2b8522418ba8d5a"
 
 [metadata.files]
 anyio = []
