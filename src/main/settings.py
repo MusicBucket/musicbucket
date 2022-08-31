@@ -21,6 +21,7 @@ class Base(
     mixins.DebugMixin,
     mixins.WhiteNoiseMixin,
     mixins.StorageMixin,
+    mixins.SentryMixin,
     Configuration,
 ):
     """

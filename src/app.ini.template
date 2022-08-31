@@ -4,7 +4,6 @@ STATIC_ROOT               = /tmp/musicbucket-static
 MEDIA_URL                 = /Users/pauriera/workspace/musicbucket/media
 
 [Logs]
-SENTRY_ENABLED            = False
 SENTRY_DSN                =
 LOG_LEVEL                 = DEBUG
 DJANGO_LOG_LEVEL          = INFO
