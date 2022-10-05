@@ -24,18 +24,19 @@
             {# page specific css goes here #}
         {% endblock page_css %}
     {% endcompress %}
-
-    {# Google Analytics #}
-    <script>
-        window.ga = window.ga || function () {
-            (ga.q = ga.q || []).push(arguments)
-        };
-        ga.l = +new Date;
-        ga('create', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}', 'auto');
-        ga('send', 'pageview');
-    </script>
-    <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
+{# Google tag (gtag.js) #}
+<script async
+        src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}">
+</script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}');
+</script>
 <body>
 {% include 'collagegenerator/components/header.html' %}
 {% block content %}
