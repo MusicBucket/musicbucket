@@ -11,6 +11,18 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'main/img/favicon.ico' %}">
     <title>{% block title %}MusicBucket - {% block extra_title %}{% endblock extra_title %}{% endblock title %}</title>
+    {# Google tag (gtag.js) #}
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}');
+    </script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
@@ -30,18 +42,6 @@
         {% endblock page_css %}
     {% endcompress %}
 </head>
-{# Google tag (gtag.js) #}
-<script async
-        src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}">
-</script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}');
-</script>
 <body class="body">
 <header>
     {% include "main/components/navbar.html" %}

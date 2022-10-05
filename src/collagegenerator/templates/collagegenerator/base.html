@@ -8,6 +8,18 @@
           content="{% trans "Generate awesome collages from your Last.fm most listened albums, artists or tracks. Create Last.fm collages of your tops." %}">
     <meta name="author" content="pauriera.com">
     <title>Last.fm collage generator</title>
+    {# Google tag (gtag.js) #}
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}');
+    </script>
     <link rel="icon" type="image/x-icon"
           href="{% static 'collagegenerator/img/favicon.ico' %}">
     {% block css %}
@@ -25,18 +37,7 @@
         {% endblock page_css %}
     {% endcompress %}
 </head>
-{# Google tag (gtag.js) #}
-<script async
-        src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}">
-</script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', '{{ config.GOOGLE_ANALYTICS_TRACKING_CODE }}');
-</script>
+
 <body>
 {% include 'collagegenerator/components/header.html' %}
 {% block content %}
