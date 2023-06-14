@@ -180,6 +180,10 @@ class Base(
             "UA-XXXXX-Y",
             "Google Analytics tracking code.",
         ),
+        "GOOGLE_ADSENSE_CODE": (
+            "ca-pub-XXXXX",
+            "Google AdSense client code."
+        )
     }
 
     # pgBouncer
