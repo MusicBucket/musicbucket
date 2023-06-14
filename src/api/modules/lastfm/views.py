@@ -112,7 +112,7 @@ class TopAlbumsView(generics.RetrieveAPIView):
         top_albums = []
         try:
             lastfm_user = telegram_user.lastfm_user
-            top_albums = LastfmClient().get_top_albums(lastfm_user.username, period)
+            top_albums = self.last_fm_client.get_top_albums(lastfm_user.username, period)
         except LastfmUser.DoesNotExist:
             lastfm_user = None
         top_albums_data = {
@@ -182,7 +182,7 @@ class TopTracksView(generics.RetrieveAPIView):
         top_tracks = []
         try:
             lastfm_user = telegram_user.lastfm_user
-            top_tracks = LastfmClient().get_top_tracks(lastfm_user.username, period)
+            top_tracks = self.last_fm_client.get_top_tracks(lastfm_user.username, period)
         except LastfmUser.DoesNotExist:
             lastfm_user = None
         top_tracks_data = {

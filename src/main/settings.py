@@ -64,6 +64,7 @@ class Base(
         "django.contrib.sites",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        "django.contrib.sitemaps",
         # apps
         "main",
         "api",
@@ -180,9 +181,6 @@ class Base(
             "Google Analytics tracking code.",
         ),
     }
-
-    # Robots
-    ROBOTS_SITEMAP_URLS = [opts.get("SITEMAP_URL", "")]
 
     # pgBouncer
     # https://docs.djangoproject.com/en/2.1/ref/databases/#transaction-pooling-server-side-cursors

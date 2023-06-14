@@ -12,6 +12,6 @@
   },
   "private": false,
   "dependencies": {
-    "node-sass": "^6.0.1"
+    "node-sass": "^9.0.0"
   }
 }

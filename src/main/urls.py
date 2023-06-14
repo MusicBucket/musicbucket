@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
+
+from main.sitemaps import StaticViewSitemap
 
 urlpatterns = [
     path("", include("web.urls")),
@@ -27,6 +30,13 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("hijack/", include("hijack.urls", namespace="hijack")),
     path("django-rq/", include("django_rq.urls")),
+    path("robots.txt", include("robots.urls")),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": {"static": StaticViewSitemap}},
+        name="django.contrib.sitemaps.views.sitemap"
+    ),
 ]
 
 if settings.DEBUG:
@@ -34,7 +44,8 @@ if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 
     if settings.ENABLE_DEBUG_TOOLBAR:
         import debug_toolbar
