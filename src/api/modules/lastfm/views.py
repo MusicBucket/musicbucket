@@ -1,5 +1,5 @@
 import pylast
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework import mixins as rf_mixins
@@ -74,12 +74,14 @@ class CollageAPIView(generics.GenericAPIView):
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):
-        # TODO: Parameter validation
         # TODO: Accept entity as parameter
         telegram_user = get_object_or_404(
             TelegramUser, telegram_id=self.kwargs.get("user__telegram_id")
         )
-        lastfm_user = telegram_user.lastfm_user
+        try:
+            lastfm_user = telegram_user.lastfm_user
+        except TelegramUser.lastfm_user.RelatedObjectDoesNotExist:
+            raise Http404
         query_params = self.request.query_params.copy()
         image = LastfmClient.generate_collage(
             lastfm_user.username,
