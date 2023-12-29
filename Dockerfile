@@ -33,7 +33,7 @@ RUN \
     pip install poetry
 WORKDIR /srv
 RUN poetry config virtualenvs.create false && \
-    poetry install --no-dev
+    poetry install --no-dev --no-root
 # End Poetry
 
 # Yarn

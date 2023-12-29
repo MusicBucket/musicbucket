@@ -90,7 +90,6 @@ class Base(
         "django_tables2",
         "crispy_forms",
         "hijack",
-        "cookielaw",
         "corsheaders",
     ]
 
