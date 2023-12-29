@@ -1,6 +1,7 @@
 import pylast
 from PIL import Image
 from django.conf import settings
+from lastfmcollagegenerator import constants as lastfmconstants
 
 from lastfmcollagegenerator.collage_generator import CollageGenerator
 
@@ -65,7 +66,7 @@ class LastfmClient:
             username: str,
             cols: int,
             rows: int,
-            entity: str = CollageGenerator.ENTITY_ALBUM,
+            entity: str = lastfmconstants.ENTITY_ALBUM,
             period: str = pylast.PERIOD_7DAYS
     ) -> Image:
         # TODO: This is a workaround method. CollageGenerator should

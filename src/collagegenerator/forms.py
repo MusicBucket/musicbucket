@@ -3,7 +3,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from lastfmcollagegenerator.collage_generator import CollageGenerator
+from lastfmcollagegenerator import constants as lastfmconstants
 
 from api.modules.lastfm.client import LastfmClient
 
@@ -12,9 +12,9 @@ class CollageForm(forms.Form):
     MAX_ROWS = 5
     MAX_COLUMNS = 5
     ENTITIES = (
-        (CollageGenerator.ENTITY_ALBUM, _("Album")),
-        (CollageGenerator.ENTITY_ARTIST, _("Artist")),
-        (CollageGenerator.ENTITY_TRACK, _("Track")),
+        (lastfmconstants.ENTITY_ALBUM, _("Album")),
+        (lastfmconstants.ENTITY_ARTIST, _("Artist")),
+        (lastfmconstants.ENTITY_TRACK, _("Track")),
     )
     PERIODS = (
         (pylast.PERIOD_7DAYS, _("7 days")),

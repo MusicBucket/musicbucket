@@ -7,12 +7,12 @@ authors = ["Pau Riera <pau.riera.forteza@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 Django = "^4.1"
-djangorestframework = "==3.13.1"
-django-compressor = {git = "https://github.com/django-compressor/django-compressor.git", rev = "develop"}  # TODO: Change to 3.0 after 2022/01/01
+djangorestframework = "==3.14.0"
+django-compressor = "==4.4"
 django-constance = {version = "==2.9.1", extras = ["database"]}
 django-storages = "==1.13.1"
 django-extensions = "==3.2.0"
-django-kaio = "==1.3.0"
+django-kaio = "==1.5.0"
 django-robots = {git = "https://github.com/jazzband/django-robots.git"}
 django-widget-tweaks = "==1.4.12"
 pytz = "==2022.2.1"
@@ -36,7 +36,7 @@ django-cookie-law = "==2.2.0"
 whitenoise = "==6.2.0"
 django-cors-headers = "==3.13.*"
 django-rq = "==2.5.1"
-lastfmcollagegenerator = "==0.4.1"
+lastfmcollagegenerator = "==0.4.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
